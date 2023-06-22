@@ -1,0 +1,50 @@
+/* Site Wide Universal Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#website-colors {
+  /* WOfficial LSU Colors from:
+  https://itservice.lsu.edu/TDClient/51/OCUR/KB/ArticleDet?ID=430; */
+
+  /* Primary Colors */
+  color: #461d7c; /*Offical LSU Purple*/
+  color: #fdd023; /*Official LSU Gold*/
+
+  /* Tonal Palette */
+  color: #3c1053; /*Corporate Purple*/
+  color: #a39aac; /*Light Purple*/
+  color: #d29f13; /*Corporate Gold*/
+  color: #f1eedb; /*Light Gold*/
+
+  /* Neutral Palette */
+  color: #d0d0ce; /*Light Gray*/
+  color: #999999; /* 50% Gray*/
+  color: #333333; /* Process Black */
+  color: #8c734a; /*LSU Metallic Gold*/
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  /* Making our root div 100vh so that we can use flex to make children (mainly the body) take up all available verticle space */
+  height: 100vh;
+}
+
+#header {
+  background-color: #3c1053;
+  color: #d0d0ce; /*Light Gray*/
+}
+
+#nav {
+  background-color: #d29f13;
+}
+
+#main {
+  /* Using flex grow to make main body section take up all available verticle space (but not more than that) */
+  flex: 1 0 0;
+  background-color: #d0d0ce;
+}
