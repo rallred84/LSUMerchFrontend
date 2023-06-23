@@ -1,6 +1,6 @@
 # LSU Merch Frontend
 
-### Team Name: MIERNEDO / Members: Robert Allred
+### Team Name: MIERNEDO / Members: Robert Allred, Sydney Weakley
 
 ## Overview:
 
