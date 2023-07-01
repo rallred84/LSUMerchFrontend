@@ -1,4 +1,5 @@
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import tigersden from "../assets/tigersden.svg";
 
 const Header = () => {
   return (
