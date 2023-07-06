@@ -11,19 +11,27 @@ import Button from "@mui/material/Button";
 const Nav = () => {
   return (
     <div id="nav-container">
-      <div id="nav-links">
-        <li>
-          <Link to="/">Category</Link>
-        </li>
-        <li>
-          <Link to="/">Category</Link>
-        </li>
-        <li>
-          <Link to="/">Category</Link>
-        </li>
-        <li>
-          <Link to="/">Category</Link>
-        </li>
+      <div id="nav-link">
+        <div id="nav-link1">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <div id="nav-link2">
+            <li>
+              <Link to="/products">Shop All Products</Link>
+            </li>
+          </div>
+          <div id="nav-link3">
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </div>
+          <div id="nav-link4">
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </div>
+        </div>
       </div>
       <div id="nav-menu">
         {/* <Button variant="text" id="menu-button">

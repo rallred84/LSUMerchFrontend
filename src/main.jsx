@@ -8,6 +8,8 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Checkout from "./components/checkout";
 import Account from "./components/account";
+import Admin from "./components/admin";
+import Products from "./components/products";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <Account />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
+      },
+      {
+        path: "/products",
+        element: <Products />,
       },
     ],
   },
