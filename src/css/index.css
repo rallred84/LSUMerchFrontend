@@ -43,6 +43,11 @@
   justify-content: space-between;
   padding: 0 20px;
 }
+#header-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 
 #header-logo {
   color: #d0d0ce;
@@ -50,6 +55,10 @@
   font-weight: bold;
 }
 #header-cart {
+  color: #d0d0ce;
+  font-size: large;
+}
+#profile-header {
   color: #d0d0ce;
   font-size: large;
 }

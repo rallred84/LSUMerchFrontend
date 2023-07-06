@@ -6,6 +6,8 @@ import Root from "./routes/root";
 import Welcome from "./components/welcome";
 import Login from "./components/login";
 import Register from "./components/register";
+import Checkout from "./components/checkout";
+import Account from "./components/account";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/account",
+        element: <Account />,
       },
     ],
   },
