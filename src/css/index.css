@@ -8,10 +8,17 @@
 
 /*Tiger's Den Font*/
 @font-face {
-  font-family: 'daggersquare';
-  src: url('../assets/fonts/daggersquare-webfont.woff2') format('woff2'),
-       url('../assets/fonts/daggersquare-webfont.woff') format('woff');
+  font-family: "daggersquare";
+  src: url("fonts/daggersquare-webfont.woff2") format("woff2"),
+    url("fonts/daggersquare-webfont.woff") format("woff");
   font-weight: normal;
+}
+
+@font-face {
+  font-family: "daggersquareoblique";
+  src: url("fonts/daggersquare_oblique-webfont.woff2") format("woff2"),
+    url("fonts/daggersquare_oblique-webfont.woff") format("woff");
+  font-weight: bold;
 }
 
 #website-colors {
@@ -63,7 +70,7 @@
 }
 #header-logo {
   color: #d0d0ce;
-  font-family: daggersquare, sans-serif;
+  font-family: "daggersquare";
   font-size: 40px;
   font-weight: bold;
 }
@@ -77,13 +84,15 @@
 }
 #nav-container {
   background-color: #d29f13;
-  height: 40px;
+  height: 70px;
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 }
-#nav-links {
+#nav-link {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   /* margin-left: 10px; */
@@ -106,6 +115,7 @@
 }
 li {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
