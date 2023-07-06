@@ -26,9 +26,9 @@ const Nav = () => {
         </li>
       </div>
       <div id="nav-menu">
-        <Button variant="text" id="menu-button">
+        {/* <Button variant="text" id="menu-button">
           Menu
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

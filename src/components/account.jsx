@@ -1,4 +1,9 @@
 const Account = () => {
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setToken("");
+    setUser({});
+  }
   return (
     <div>
       <h1>Account Details</h1>
@@ -16,11 +21,7 @@ const Account = () => {
         <h1>Order History</h1>
       </div>
       <div>
-        <button
-        // onClick={logout}
-        >
-          Logout
-        </button>
+        <button onClick={handleLogout}>Logout</button>
       </div>
     </div>
   );
