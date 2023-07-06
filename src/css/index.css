@@ -6,6 +6,21 @@
   box-sizing: border-box;
 }
 
+/*Tiger's Den Font*/
+@font-face {
+  font-family: 'daggersquare';
+  src: url('fonts/daggersquare-webfont.woff2') format('woff2'),
+       url('fonts/daggersquare-webfont.woff') format('woff');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'daggersquareoblique';
+  src: url('fonts/daggersquare_oblique-webfont.woff2') format('woff2'),
+       url('fonts/daggersquare_oblique-webfont.woff') format('woff');
+  font-weight: bold;
+}
+
 #website-colors {
   /* WOfficial LSU Colors from:
   https://itservice.lsu.edu/TDClient/51/OCUR/KB/ArticleDet?ID=430; */
@@ -37,7 +52,7 @@
 #header-container {
   background-color: #3c1053;
   color: #d0d0ce; /*Light Gray*/
-  height: 70px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,8 +64,13 @@
   justify-content: flex-end;
 }
 
+#logo-graphic {
+  height: 175px;
+  margin-top: 10px;
+}
 #header-logo {
   color: #d0d0ce;
+  font-family: daggersquare, sans-serif;
   font-size: 40px;
   font-weight: bold;
 }

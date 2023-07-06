@@ -5,7 +5,8 @@ import tigersden from "../assets/tigersden.svg";
 const Header = () => {
   return (
     <div id="header-container">
-      <div id="header-logo">LSU Logo</div>
+      <img id="logo-graphic" src={tigersden} />
+      <div id="header-logo">TIGER'S DEN</div>
       <div id="header-menu">
         <div id="header-cart">
           <ShoppingCartIcon />
