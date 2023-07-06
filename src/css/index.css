@@ -9,16 +9,9 @@
 /*Tiger's Den Font*/
 @font-face {
   font-family: 'daggersquare';
-  src: url('fonts/daggersquare-webfont.woff2') format('woff2'),
-       url('fonts/daggersquare-webfont.woff') format('woff');
+  src: url('../assets/fonts/daggersquare-webfont.woff2') format('woff2'),
+       url('../assets/fonts/daggersquare-webfont.woff') format('woff');
   font-weight: normal;
-}
-
-@font-face {
-  font-family: 'daggersquareoblique';
-  src: url('fonts/daggersquare_oblique-webfont.woff2') format('woff2'),
-       url('fonts/daggersquare_oblique-webfont.woff') format('woff');
-  font-weight: bold;
 }
 
 #website-colors {
