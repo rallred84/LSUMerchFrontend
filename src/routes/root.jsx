@@ -1,10 +1,11 @@
 // This is the main landing page for the app.
 
-import { Outlet } from 'react-router-dom';
-import Header from '../components/header';
-import Nav from '../components/nav';
-import { useEffect, useState } from 'react';
-import { getAllProducts } from '../api';
+import { Outlet } from "react-router-dom";
+import Header from "../components/header";
+import Nav from "../components/nav";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../api";
+const cardsContainer = document.querySelector("#cards-container");
 
 //All Global state to be saved in this file and then exported to other components via Outlet Context
 
@@ -15,18 +16,20 @@ const Root = () => {
   useEffect(() => {
     const fetchAllProducts = async () => {
       const fetchProducts = await getAllProducts();
-      setProducts(fetchProducts)
-    }
+      setProducts(fetchProducts);
+    };
 
-    fetchAllProducts()
-  }, [])
+    fetchAllProducts();
+  }, []);
 
   return (
     <>
       <Header />
       <Nav />
       <div id="main">
+
         <Outlet context={{products, setToken}} />
+
       </div>
     </>
   );

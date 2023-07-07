@@ -106,6 +106,48 @@
   display: flex;
   justify-content: center;
 }
+#cards-container {
+  display: grid;
+  width: 85vw;
+  margin: 0 auto;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+#card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 1px solid #3c1053;
+  background-color: white;
+  border-radius: 25px;
+  padding: 25px;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: all 0.25s ease-out;
+  margin: 10px;
+  max-width: 400px;
+}
+#card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+#product-btn {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #3c1053;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+#product-btn:hover {
+  transform: scale(1.1);
+}
+img {
+  max-width: 100%;
+}
 li {
   display: flex;
   flex-direction: column;
