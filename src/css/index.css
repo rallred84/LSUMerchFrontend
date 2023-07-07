@@ -106,14 +106,15 @@
   display: flex;
   justify-content: center;
 }
-#card {
+#cards-container {
   display: grid;
   width: 85vw;
   margin: 0 auto;
   gap: 20px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
-#cards-container {
+#card {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -127,7 +128,7 @@
   margin: 10px;
   max-width: 400px;
 }
-#cards-container:hover {
+#card:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 #product-btn {
