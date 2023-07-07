@@ -11,6 +11,7 @@ const cardsContainer = document.querySelector("#cards-container");
 
 const Root = () => {
   const [products, setProducts] = useState([]);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -26,7 +27,9 @@ const Root = () => {
       <Header />
       <Nav />
       <div id="main">
-        <Outlet context={{ products }} />
+
+        <Outlet context={{products, setToken}} />
+
       </div>
     </>
   );
