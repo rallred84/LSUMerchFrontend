@@ -20,6 +20,28 @@ export async function createUser(email, password, firstName, lastName) {
       })
     });
     const result = await response.json();
+    // console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+/* POST /users/login */
+export async function loginUser(email, password) {
+  try {
+    const response = await fetch(`${BASE_URL}/users/login`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          email,
+          password,
+      })
+    });
+    const result = await response.json();
     console.log(result);
     return result;
   } catch (err) {

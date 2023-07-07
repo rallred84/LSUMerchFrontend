@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import { createUser } from "../api";
+import { createUser, loginUser } from "../api";
 
 export default function Login() {
     const [loginEmail, setLoginEmail] = useState("");
@@ -22,11 +22,28 @@ export default function Login() {
     async function handleLogin(event) {
         event.preventDefault();
         console.log(loginEmail, loginPassword, loginConfirm);
+
+        if (registerPassword !== registerConfirm) {
+         setError("Passwords don't match!");
+         return;
+        }
+
+        const login = await loginUser(loginEmail, loginPassword);
+        console.log(login);
+
+        if (!login.success) {
+         setError(login.error.message);
+         return;
+        }
+
+        setToken(login.data.token);
+        localStorage.setItem("token", login.data.token);
+        navigate("/");
       }
 
     async function handleRegister(event) {
         event.preventDefault();
-        console.log(firstName, lastName, registerEmail, registerPassword, registerConfirm);
+      //   console.log(firstName, lastName, registerEmail, registerPassword, registerConfirm);
 
         if (registerPassword !== registerConfirm) {
          setError("Passwords don't match!");
@@ -34,7 +51,7 @@ export default function Login() {
         }
 
         const result = await createUser(registerEmail, registerPassword, firstName, lastName)
-        console.log(result)
+      //   console.log(result)
 
         if (!result.success) {
          setError(result.error.message);
