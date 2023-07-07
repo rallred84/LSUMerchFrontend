@@ -5,29 +5,29 @@ import { Link } from "react-router-dom";
 export default function Register() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirm, setConfirm] = useState("");
+    const [registerEmail, setRegisterEmail] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
+    const [registerConfirm, setRegisterConfirm] = useState("");
     const [error, setError] = useState("");
 
-    async function handleLogin(event) {
+    async function handleRegister(event) {
         event.preventDefault();
-        console.log(firstName, lastName, email, password, confirm);
+        console.log(firstName, lastName, registerEmail, registerPassword, registerConfirm);
       }
 
     return(
         <div>
          <h1 id="headline">Register</h1>
-         <form onSubmit={handleLogin} id="registering">
+         <form onSubmit={handleRegister} id="registering">
             <input placeholder="first name" onChange={(event) => setFirstName(event.target.value)} value={firstName}
                />
             <input placeholder="last name" onChange={(event) => setLastName(event.target.value)} value={lastName}
                />
-            <input placeholder="email" onChange={(event) => setEmail(event.target.value)} value={email}
+            <input placeholder="email" onChange={(event) => setRegisterEmail(event.target.value)} value={registerEmail}
                />
-            <input placeholder="password" type="password" onChange={(event) => setPassword(event.target.value)} value={password}
+            <input placeholder="password" type="password" onChange={(event) => setRegisterPassword(event.target.value)} value={registerPassword}
                />
-            <input placeholder="confirm" type="password" onChange={(event) => setConfirm(event.target.value)} value={confirm}
+            <input placeholder="confirm" type="password" onChange={(event) => setRegisterConfirm(event.target.value)} value={registerConfirm}
                />
             <div id="reg-err">{error}</div>
             <button id="register">Register</button>
