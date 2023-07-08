@@ -1,6 +1,5 @@
 // Will set up all API Requests here
-export const BASE_URL = "https://tigers-den.onrender.com/api"
-
+export const BASE_URL = "https://tigers-den.onrender.com/api";
 
 /*users*/
 
@@ -10,23 +9,22 @@ export async function createUser(email, password, firstName, lastName) {
     const response = await fetch(`${BASE_URL}/users/register`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-          email,
-          password,
-          firstName,
-          lastName,
-      })
+        email,
+        password,
+        firstName,
+        lastName,
+      }),
     });
     const result = await response.json();
     // console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
-
 
 /* POST /users/login */
 export async function loginUser(email, password) {
@@ -34,28 +32,24 @@ export async function loginUser(email, password) {
     const response = await fetch(`${BASE_URL}/users/login`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-          email,
-          password,
-      })
+        email,
+        password,
+      }),
     });
     const result = await response.json();
     console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
 
-
-
 //////////////////
 
-
-
-/*products*/ 
+/*products*/
 
 /* GET /products */
 export async function getAllProducts() {
@@ -64,11 +58,10 @@ export async function getAllProducts() {
     const result = await response.json();
     const info = result.data.products;
     // console.log(info)
-    return info
+    return info;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
-
 
 //////////////////

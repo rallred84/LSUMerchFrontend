@@ -131,7 +131,7 @@
 #card:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
-#product-btn {
+.product-btn {
   border: none;
   outline: 0;
   padding: 12px;
@@ -142,12 +142,13 @@
   width: 100%;
   font-size: 18px;
 }
-#product-btn:hover {
+.product-btn:hover {
   transform: scale(1.1);
 }
 img {
   max-width: 100%;
 }
+
 li {
   display: flex;
   flex-direction: column;

@@ -27,9 +27,9 @@ const Nav = () => {
             </li>
           </div>
           <div id="nav-link4">
-            <li>
+            {/* <li>
               <Link to="/register">Register</Link>
-            </li>
+            </li> */}
           </div>
         </div>
       </div>

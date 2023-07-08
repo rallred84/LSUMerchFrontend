@@ -5,18 +5,20 @@ import Header from "../components/header";
 import Nav from "../components/nav";
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../api";
-const cardsContainer = document.querySelector("#cards-container");
 
 //All Global state to be saved in this file and then exported to other components via Outlet Context
 
 const Root = () => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
   useEffect(() => {
     const fetchAllProducts = async () => {
+      setIsLoadingProducts(true);
       const fetchProducts = await getAllProducts();
       setProducts(fetchProducts);
+      setIsLoadingProducts(false);
     };
 
     fetchAllProducts();
@@ -27,9 +29,9 @@ const Root = () => {
       <Header />
       <Nav />
       <div id="main">
-
-        <Outlet context={{products, setToken}} />
-
+        <Outlet
+          context={{ products, setToken, setIsLoadingProducts, setProducts }}
+        />
       </div>
     </>
   );
