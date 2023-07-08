@@ -42,8 +42,27 @@ export async function loginUser(email, password) {
       })
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+/* GET /users/profile */
+export async function getProfile(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/users/profile`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+    const result = await response.json();
+    const info = result.data.user;
+    console.log(info);
+    return info;
   } catch (err) {
     console.error(err)
   }
@@ -65,6 +84,32 @@ export async function getAllProducts() {
     const info = result.data.products;
     // console.log(info)
     return info
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+/* POST /products */
+export async function createProduct(token, name, description, price, stockQuantity, size) {
+  try {
+    const response = await fetch(`${BASE_URL}/products`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+          name,
+          description,
+          price, 
+          stockQuantity,
+          size, 
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
   } catch (err) {
     console.error(err)
   }
