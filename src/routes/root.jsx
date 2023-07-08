@@ -15,21 +15,35 @@ const Root = () => {
 
   useEffect(() => {
     const fetchAllProducts = async () => {
+      setIsLoadingProducts(true);
       const fetchProducts = await getAllProducts();
       setProducts(fetchProducts);
+      setIsLoadingProducts(false);
     };
 
     fetchAllProducts();
   }, []);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setToken(token);
+        const fetchMe = await getProfile(token);
+        setUser(fetchMe);
+      }
+    };
+    fetchUser();
+  }, [token]);
 
   return (
     <>
       <Header />
       <Nav />
       <div id="main">
-
-        <Outlet context={{products, setToken}} />
-
+        <Outlet
+          context={{ products, setToken, token, user, setUser, setProducts }}
+        />
       </div>
     </>
   );
