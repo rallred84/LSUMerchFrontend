@@ -3,7 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import tigersden from "../assets/tigersden.svg";
 import { Button } from "@mui/material";
 
-const Header = () => {
+const Header = ({user}) => {
   function checkout() {
     window.location.href = "/checkout";
   }
@@ -21,11 +21,15 @@ const Header = () => {
             <ShoppingCartIcon />
           </Button>
         </div>
-        <div id="profile-header">
-          <Button onClick={account}>
-            <AccountCircleIcon />
-          </Button>
-        </div>
+        {user.id && (
+        <>
+          <div id="profile-header">
+            <Button onClick={account}>
+              <AccountCircleIcon />
+            </Button>
+          </div>
+        </>
+        )}
       </div>
     </div>
   );
