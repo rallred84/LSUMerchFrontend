@@ -9,6 +9,9 @@ import Checkout from "./components/checkout";
 import Account from "./components/account";
 import Admin from "./components/admin";
 import Products from "./components/products";
+import NewProduct from "./components/newproduct";
+import ManageProducts from "./components/manageproducts";
+import EditProduct from "./components/editproduct";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/new-product",
+        element: <NewProduct />,
+      },
+      {
+        path: "/manage-products",
+        element: <ManageProducts />,
+      },
+      {
+        path: "/manage-products/:productId",
+        element: <EditProduct />,
       },
       {
         path: "/products",
