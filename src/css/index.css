@@ -78,19 +78,52 @@
 #nav-container {
   background-color: #d29f13;
   height: 70px;
-  display: flex;
-
+  /* display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between; */
+}
+.nav-link {
+  color: #d0d0ce;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+
   justify-content: space-between;
 }
-#nav-link {
+.nav-link1 {
+  color: #d0d0ce;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.nav-link2 {
+  color: #d0d0ce;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-evenly;
+}
+/* .nav-link {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* margin-left: 10px; */
-  list-style-type: none;
-}
+  margin-left: 10px;
+  list-style-type: none
+}  */
 #nav-menu {
   color: #3c1053;
 }
@@ -162,6 +195,15 @@
   justify-content: center;
   align-items: center;
 }
+.all-single-product-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+  border: none;
+
+  outline: 0;
+}
 .single-product-btn {
   border: none;
   outline: 0;
@@ -170,7 +212,8 @@
   background-color: #3c1053;
   text-align: center;
   cursor: pointer;
-  width: 50%;
+  width: 150px;
+  height: 70px;
   font-size: 18px;
 }
 .single-product-btn:hover {
@@ -190,7 +233,8 @@
   background-color: #3c1053;
   text-align: center;
   cursor: pointer;
-  width: 100%;
+  width: 150px;
+  height: 70px;
   font-size: 18px;
   margin-top: 20px;
 }
@@ -203,13 +247,35 @@
 .back-btn:focus {
   transform: scale(1.1);
 }
+.review-btn {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #3c1053;
+  text-align: center;
+  cursor: pointer;
+  width: 150px;
+  height: 70px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.review-btn:hover {
+  transform: scale(1.1);
+}
+.review-btn:active {
+  transform: scale(0.9);
+}
+.review-btn:focus {
+  transform: scale(1.1);
+}
 img {
   max-width: 100%;
 }
 
-li {
+/* li {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-}
+} */

@@ -12,11 +12,14 @@ const Root = () => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
   useEffect(() => {
     const fetchAllProducts = async () => {
+      setIsLoadingProducts(true);
       const fetchProducts = await getAllProducts();
       setProducts(fetchProducts);
+      setIsLoadingProducts(false);
     };
 
     fetchAllProducts();
@@ -33,6 +36,9 @@ const Root = () => {
     };
     fetchUser();
   }, [token]);
+  if (isLoadingProducts) {
+    return <>Loading...</>;
+  }
 
   return (
     <>
