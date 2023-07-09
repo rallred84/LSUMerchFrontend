@@ -72,7 +72,6 @@ const Admin = () => {
         />
         <button id="create-product">Create Product</button>
       </form>
-
       <ImageUpload />
     </div>
   );

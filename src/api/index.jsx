@@ -61,7 +61,7 @@ export async function getProfile(token) {
     });
     const result = await response.json();
     const info = result.data.user;
-    console.log(info);
+    // console.log(info);
     return info;
   } catch (err) {
     console.error(err)
@@ -82,7 +82,7 @@ export async function getAllProducts() {
     const response = await fetch(`${BASE_URL}/products`);
     const result = await response.json();
     const info = result.data.products;
-    // console.log(info)
+    console.log(info)
     return info
   } catch (err) {
     console.error(err)
@@ -114,6 +114,53 @@ export async function createProduct(token, name, description, price, stockQuanti
     console.error(err)
   }
 }
+
+
+/* PATCH /products/:productId */
+export async function editProduct(token, productId, name, description, price, stockQuantity, size) {
+  try {
+    const response = await fetch(`${BASE_URL}/products/${productId}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+          name,
+          description,
+          price, 
+          stockQuantity,
+          size, 
+      })
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+/* DELETE /products/:productId */
+export async function deleteProduct(token, productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/products/${productId}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
 
 
 //////////////////
