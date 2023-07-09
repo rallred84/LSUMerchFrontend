@@ -17,8 +17,8 @@ export default function Welcome() {
         {products.length > 0
           ? products.map((product) => {
               return (
-                <div id="card">
-                  <div className="products-pg" key={product.id}>
+                <div id="card" key={product.id}>
+                  <div className="products-pg">
                     <Link to={`/products/${product.id}`}>
                       <h1 className="product-name">{product.name}</h1>
 

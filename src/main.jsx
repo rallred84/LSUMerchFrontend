@@ -41,7 +41,6 @@ const router = createBrowserRouter([
       },
 
       {
-
         path: "/new-product",
         element: <NewProduct />,
       },
@@ -54,7 +53,7 @@ const router = createBrowserRouter([
         element: <EditProduct />,
       },
       {
-        path: "/products",
+        path: "/products/:productId",
 
         element: <Products />,
       },
