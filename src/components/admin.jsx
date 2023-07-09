@@ -43,6 +43,7 @@ const Admin = () => {
   return (
     <div>
       <h1>Admin</h1>
+
       <h2>Create Products</h2>
       <form onSubmit={handleSubmit} id="new-product">
         <input

@@ -38,7 +38,7 @@ export default function Login() {
 
         setToken(login.data.token);
         localStorage.setItem("token", login.data.token);
-        navigate("/account");
+        navigate("/");
       }
 
     async function handleRegister(event) {
@@ -60,7 +60,7 @@ export default function Login() {
 
         setToken(result.data.token);
         localStorage.setItem("token", result.data.token);
-        navigate("/account");
+        navigate("/");
       }
 
     return(

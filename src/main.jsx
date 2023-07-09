@@ -39,7 +39,9 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <Admin />,
       },
+
       {
+
         path: "/new-product",
         element: <NewProduct />,
       },
@@ -53,6 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
+
         element: <Products />,
       },
     ],
