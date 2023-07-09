@@ -42,12 +42,12 @@ export default function Products() {
   }
   return (
     <div id="product-pg">
-      <h1 className="product-name">{productName}</h1>
+      <h1 className="single-product-name">{productName}</h1>
       <div className="product-description">{description}</div>
       <div className="single-product-image">
         <img src="https://placekitten.com/640/360" alt={products.name} />
       </div>
-      <div className="single-product-price">{price}</div>
+      <div className="single-product-price">Price: {price}</div>
       <div className="product-page-btn">
         {" "}
         <button className="single-product-btn" onClick={addToCart}>

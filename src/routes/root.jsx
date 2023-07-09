@@ -46,7 +46,16 @@ const Root = () => {
       <Nav user={user} setUser={setUser} setToken={setToken} />
       <div id="main">
         <Outlet
-          context={{ products, setToken, token, user, setUser, setProducts }}
+          context={{
+            products,
+            setToken,
+            token,
+            user,
+            setUser,
+            setProducts,
+            isLoadingProducts,
+            setIsLoadingProducts,
+          }}
         />
       </div>
     </>
