@@ -4,21 +4,19 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/header";
 import Nav from "../components/nav";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../api";
-const cardsContainer = document.querySelector("#cards-container");
+import { getAllProducts, getProfile } from "../api";
 
 //All Global state to be saved in this file and then exported to other components via Outlet Context
 
 const Root = () => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchAllProducts = async () => {
-      setIsLoadingProducts(true);
       const fetchProducts = await getAllProducts();
       setProducts(fetchProducts);
-      setIsLoadingProducts(false);
     };
 
     fetchAllProducts();
@@ -38,8 +36,8 @@ const Root = () => {
 
   return (
     <>
-      <Header />
-      <Nav />
+      <Header user={user} setUser={setUser} setToken={setToken} />
+      <Nav user={user} setUser={setUser} setToken={setToken} />
       <div id="main">
         <Outlet
           context={{ products, setToken, token, user, setUser, setProducts }}
