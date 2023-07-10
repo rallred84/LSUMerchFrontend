@@ -21,7 +21,7 @@ const Header = ({ user }) => {
             <ShoppingCartIcon />
           </Button>
         </div>
-        {user.id && (
+        {user?.id && (
           <>
             <div id="profile-header">
               <Button onClick={account}>

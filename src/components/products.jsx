@@ -5,25 +5,18 @@ import { useParams } from "react-router-dom";
 
 export default function Products() {
   const { productId } = useParams();
-  const { products } = useOutletContext();
 
   const [loading, setLoading] = useState(true);
-  const [productName, setProductName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
+  const [product, setProduct] = useState({});
 
   const singleProduct = async () => {
     try {
       setLoading(true);
-      const response = await getAllProducts(productId);
+      const products = await getAllProducts(productId);
 
-      let productName = response[productId - 1].name;
-      let price = response[productId - 1].price;
-      let description = response[productId - 1].description;
+      const product = products.find((product) => product.id == productId);
+      setProduct(product);
 
-      setProductName(productName);
-      setPrice(price);
-      setDescription(description);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -42,12 +35,12 @@ export default function Products() {
   }
   return (
     <div id="product-pg">
-      <h1 className="single-product-name">{productName}</h1>
-      <div className="product-description">{description}</div>
+      <h1 className="single-product-name">{product.name}</h1>
+      <div className="product-description">{product.description}</div>
       <div className="single-product-image">
-        <img src="https://placekitten.com/640/360" alt={products.name} />
+        <img src={product.imageURL} alt={product.name} />
       </div>
-      <div className="single-product-price">Price: {price}</div>
+      <div className="single-product-price">Price: {product.price}</div>
       <div className="product-page-btn">
         {" "}
         <button className="single-product-btn" onClick={addToCart}>
