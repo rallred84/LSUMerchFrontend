@@ -49,17 +49,15 @@ export default function Products() {
       </div>
       <div className="single-product-price">Price: {product.price}</div>
       <div className="product-page-btn">
-        {/* {" "}
         <ThemeProvider theme={theme}>
-          {" "} */}
-        <Button onClick={addToCart} className="single-product-btn">
-          Add to Cart
-        </Button>{" "}
-        <br />
-        <Link to="/">
+          <Button onClick={addToCart} className="single-product-btn">
+            Add to Cart
+          </Button>{" "}
+          <br />
+          <Link to="/">
           <Button className="single-product-btn">Back to Products</Button>{" "}
-        </Link>
-        {/* </ThemeProvider> */}
+          </Link>
+        </ThemeProvider>
       </div>
     </div>
   );
