@@ -127,13 +127,13 @@ export default function Login() {
               color="secondary"
               size="small"
             />
-            {!loginConfirm && loginPassword ? (
+            {/* {!loginConfirm && loginPassword ? (
               <Stack sx={{ width: "80%" }} spacing={2}>
                 <Alert severity="error" variant="filled" onClick={setError}>
                   {error}
                 </Alert>
               </Stack>
-            ) : null}
+            ) : null} */}
             <ThemeProvider theme={theme}>
               <Button
                 className="log-in"
@@ -240,7 +240,7 @@ export default function Login() {
               </Button>
             </ThemeProvider>
 
-            {registerPassword !== registerConfirm && (
+            {/* {registerPassword !== registerConfirm && (
               <Stack sx={{ width: "80%" }} spacing={2}>
                 <Alert
                   severity="error"
@@ -250,7 +250,7 @@ export default function Login() {
                   {error}
                 </Alert>
               </Stack>
-            )}
+            )} */}
           </FormGroup>
         </>
       </div>
