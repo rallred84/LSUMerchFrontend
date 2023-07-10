@@ -1,6 +1,6 @@
 import { Link, Navigate } from "react-router-dom";
-import { useOutletContext } from "react-router-dom";
-import { useState } from "react";
+// import { useOutletContext } from "react-router-dom";
+// import { useState } from "react";
 
 const Nav = () => {
   function loggedUser() {
@@ -20,7 +20,9 @@ const Nav = () => {
               style={{ textDecoration: "none" }}
               onClick={() => {
                 localStorage.removeItem("token");
-                return window.reload();
+                setToken("");
+                setUser({});
+                window.location.reload();
               }}
             >
               Logout
@@ -32,6 +34,10 @@ const Nav = () => {
       return (
         <div id="nav-link2">
           <div className="non-user-nav">
+            <Link to="/" style={{ textDecoration: "none" }}>
+              Home
+            </Link>
+
             <Link to="/login" style={{ textDecoration: "none" }}>
               Login
             </Link>

@@ -76,7 +76,9 @@ export async function getAllProducts() {
     const result = await response.json();
     const info = result.data.products;
 
-    console.log(info);
+
+    // console.log(info)
+
     return info;
   } catch (err) {
     console.error(err);
@@ -110,7 +112,7 @@ export async function createProduct(
       }),
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (err) {
     console.error(err);
@@ -143,7 +145,7 @@ export async function editProduct(
       }),
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (err) {
     console.error(err);
