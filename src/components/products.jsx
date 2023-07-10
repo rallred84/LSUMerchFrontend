@@ -4,16 +4,15 @@ import { BASE_URL, getAllProducts } from "../api";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 
-
 import { ThemeProvider } from "@mui/material/styles";
 
 export default function Products() {
   const { productId } = useParams();
+  const { theme } = useOutletContext();
 
   const [loading, setLoading] = useState(true);
 
   const [product, setProduct] = useState({});
-
 
   const singleProduct = async () => {
     try {
