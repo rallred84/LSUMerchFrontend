@@ -8,8 +8,8 @@ export default function ManageProducts() {
   const navigate = useNavigate();
 
   async function handleDelete(productId) {
-     const result = await deleteProduct(token, productId);
-     setProducts(result);
+    const result = await deleteProduct(token, productId);
+    setProducts(result);
   }
 
   if (!products) {
@@ -27,20 +27,21 @@ export default function ManageProducts() {
                   <div id="products-pg">
                     <h1 id="product-name">{product.name}</h1>
                     <div id="product-image">
-                      <img
-                        src="https://placekitten.com/640/360"
-                        alt={product.name}
-                      />
+                      <img src={product.imageURL} alt={product.name} />
                     </div>
                     <div id="product-des">{product.description}</div>
                     <div id="product-price">{product.price}</div>
-                    <div id="product-stock">In-Stock: {product.stockQuantity}</div>
+                    <div id="product-stock">
+                      In-Stock: {product.stockQuantity}
+                    </div>
                     <Link to={`/manage-products/${product.id}`}>
                       <button>Edit</button>
                     </Link>
-                    <button onClick={() => handleDelete(product.id)}>Delete</button>
+                    <button onClick={() => handleDelete(product.id)}>
+                      Delete
+                    </button>
+                  </div>
                 </div>
-               </div>
               );
             })
           : null}

@@ -1,0 +1,19 @@
+#new-product {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-left: 50px;
+}
+
+#new-product > textarea {
+  height: 60px;
+}
+
+#upload-img-button {
+  background-color: #461d7c;
+  color: white;
+  width: 300px;
+  padding: 10px 20px;
+  text-align: center;
+  margin: 10px 0;
+}

@@ -16,6 +16,7 @@ export default function Welcome() {
       <div className="cards-container" key={products}>
         {products.length > 0
           ? products.map((product) => {
+              console.log(product);
               return (
                 <div id="card" key={product.id}>
                   <div className="products-pg">
@@ -26,10 +27,7 @@ export default function Welcome() {
                       <h1 className="product-name">{product.name}</h1>
 
                       <div className="product-image">
-                        <img
-                          src="https://placekitten.com/640/360"
-                          alt={products.name}
-                        />
+                        <img src={product.imageURL} alt={products.name} />
                       </div>
                       <div className="product-price">
                         Price: {product.price}

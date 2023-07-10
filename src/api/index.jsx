@@ -76,7 +76,9 @@ export async function getAllProducts() {
     const result = await response.json();
     const info = result.data.products;
 
+
     // console.log(info)
+
     return info;
   } catch (err) {
     console.error(err);
@@ -90,6 +92,7 @@ export async function createProduct(
   description,
   price,
   stockQuantity,
+  imageURL,
   size
 ) {
   try {
@@ -104,6 +107,7 @@ export async function createProduct(
         description,
         price,
         stockQuantity,
+        imageURL,
         size,
       }),
     });
