@@ -76,9 +76,8 @@ export async function getAllProducts() {
     const result = await response.json();
     const info = result.data.products;
 
-    console.log(info)
-    return info
-
+    // console.log(info)
+    return info;
   } catch (err) {
     console.error(err);
   }
@@ -109,40 +108,45 @@ export async function createProduct(
       }),
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (err) {
     console.error(err);
   }
 }
 
-
-
 /* PATCH /products/:productId */
-export async function editProduct(token, productId, name, description, price, stockQuantity, size) {
+export async function editProduct(
+  token,
+  productId,
+  name,
+  description,
+  price,
+  stockQuantity,
+  size
+) {
   try {
     const response = await fetch(`${BASE_URL}/products/${productId}`, {
       method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-          name,
-          description,
-          price, 
-          stockQuantity,
-          size, 
-      })
+        name,
+        description,
+        price,
+        stockQuantity,
+        size,
+      }),
     });
     const result = await response.json();
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
-
 
 /* DELETE /products/:productId */
 export async function deleteProduct(token, productId) {
@@ -150,19 +154,14 @@ export async function deleteProduct(token, productId) {
     const response = await fetch(`${BASE_URL}/products/${productId}`, {
       method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
     const result = await response.json();
     console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
-
-
-
-
-

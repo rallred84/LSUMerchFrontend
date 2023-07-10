@@ -10,6 +10,7 @@ const Header = ({ user }) => {
   function account() {
     window.location.href = "/account";
   }
+
   return (
     <div id="header-container">
       <img id="logo-graphic" src={tigersden} />
@@ -18,14 +19,14 @@ const Header = ({ user }) => {
         <div id="header-cart">
           <Button onClick={checkout}>
             {" "}
-            <ShoppingCartIcon />
+            <ShoppingCartIcon id="cart-icon" />
           </Button>
         </div>
-        {user.id && (
+        {user && (
           <>
             <div id="profile-header">
               <Button onClick={account}>
-                <AccountCircleIcon />
+                <AccountCircleIcon id="account-icon" />
               </Button>
             </div>
           </>
