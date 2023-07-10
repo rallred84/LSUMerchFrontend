@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 
 export default function Products() {
   const { productId } = useParams();
+  const { theme } = useOutletContext();
 
   const [loading, setLoading] = useState(true);
 
