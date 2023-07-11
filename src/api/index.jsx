@@ -317,3 +317,25 @@ export async function addProductToCart(token, productId) {
     console.error(err);
   }
 }
+
+//DELETE /orders_products/remove
+
+export async function removeFromCart(productId, token) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders_products/remove`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}

@@ -1,17 +1,20 @@
 import { useOutletContext } from "react-router-dom";
 import "../css/checkout.css";
 import { useEffect, useState } from "react";
+import { removeFromCart, getProfile } from "../api";
 
 const Checkout = () => {
-  const { user } = useOutletContext();
+  const { user, setUser, token } = useOutletContext();
   const [cart, setCart] = useState({});
 
   useEffect(() => {
     setCart(user.cart);
   }, [user]);
 
-  const handleRemoveFromCart = (productId) => {
-    console.log("remove", productId);
+  const handleRemoveFromCart = async (productId) => {
+    await removeFromCart(productId, token);
+    const fetchMe = await getProfile(token);
+    setUser(fetchMe);
   };
 
   return (
@@ -29,8 +32,8 @@ const Checkout = () => {
           </tr>
         </thead>
         <tbody>
-          {user.cart &&
-            user.cart.products.map((product) => {
+          {cart?.products &&
+            cart.products.map((product) => {
               return (
                 <tr key={product.id}>
                   <td>{product.id}</td>

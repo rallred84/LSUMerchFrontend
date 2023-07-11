@@ -26,3 +26,7 @@
   background-color: red;
   padding: 10px;
 }
+
+.delete-cart-product:hover {
+  cursor: pointer;
+}
