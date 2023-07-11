@@ -6,8 +6,8 @@ const S3_BUCKET = "tigers-den";
 const REGION = "us-east-2";
 
 AWS.config.update({
-  accessKeyId: "AKIA5GREX67LAR3SE3V2",
-  secretAccessKey: "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",
+  accessKeyId: import.meta.env.VITE_ACCESS_KEY_ID,
+  secretAccessKey: import.meta.env.VITE_SECRET_ACCESS_KEY,
 });
 
 const myBucket = new AWS.S3({
@@ -25,7 +25,6 @@ const ImageUpload = ({ setImageURL }) => {
   };
 
   useEffect(() => {
-    console.log(progress);
     if (progress === 100) {
       setImageURL(
         `https://tigers-den.s3.us-east-2.amazonaws.com/${imgUrlFileName}`
