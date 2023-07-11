@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/header";
 import Nav from "../components/nav";
 import { useEffect, useState } from "react";
-import { getAllProducts, getProfile } from "../api";
+import { getAllProducts, getOrders, getProfile } from "../api";
 import { createTheme } from "@mui/material/styles";
 
 //All Global state to be saved in this file and then exported to other components via Outlet Context
@@ -13,6 +13,7 @@ const Root = () => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [orders, setOrders] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
   const theme = createTheme({
@@ -61,6 +62,14 @@ const Root = () => {
     };
     fetchUser();
   }, [token]);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const fetchAllOrders = await getOrders(token);
+      console.log(fetchAllOrders);
+      setOrders(fetchAllOrders);
+    };
+    fetchOrders();
+  }, [token]);
 
   useEffect(() => {
     if (user) {
@@ -90,6 +99,8 @@ const Root = () => {
             setProducts,
             isLoadingProducts,
             setIsLoadingProducts,
+            orders,
+            setOrders,
           }}
         />
       </div>

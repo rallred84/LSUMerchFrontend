@@ -169,6 +169,7 @@ export async function deleteProduct(token, productId) {
   }
 }
 
+<<<<<<< HEAD
 /////////////////
 
 // POST /orders
@@ -177,12 +178,23 @@ export async function createNewCart(token) {
   try {
     const response = await fetch(`${BASE_URL}/orders`, {
       method: "POST",
+=======
+//////////////////
+
+/*orders*/
+
+/*GET /orders */
+export async function getOrders(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders`, {
+>>>>>>> 5c3c3c027f408320f12962856d888f9a7c90b798
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     const result = await response.json();
+<<<<<<< HEAD
     return result;
   } catch (err) {
     console.error(err);
@@ -207,8 +219,32 @@ export async function addProductToCart(token, productId) {
     const result = await response.json();
     console.log(result);
     const info = result.data.cart;
+=======
+    const info = result.data.orders;
+    // console.log(result);
+>>>>>>> 5c3c3c027f408320f12962856d888f9a7c90b798
     return info;
   } catch (err) {
     console.error(err);
   }
 }
+<<<<<<< HEAD
+=======
+
+export async function getUsersOrders(token, userId) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    const info = result.data.orders;
+    console.log(info);
+    return info;
+  } catch (err) {
+    console.error(err);
+  }
+}
+>>>>>>> 5c3c3c027f408320f12962856d888f9a7c90b798
