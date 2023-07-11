@@ -172,6 +172,74 @@ export async function deleteProduct(token, productId) {
 
 //////////////////
 
+/*reviews*/
+
+/*POST /reviews/:productId */
+export async function createReview(token, productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/reviews/${productId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message,
+        rating,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+/*PATCH /reviews/:productId */
+export async function editReview(token, productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/reviews/${productId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message,
+        rating,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+/*DELETE /reviews/:productId */
+export async function deleteReview(token, productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/reviews/${productId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+
+//////////////////
+
+
 /*orders*/
 
 /*GET /orders */
