@@ -13,6 +13,7 @@ import NewProduct from "./components/newproduct";
 import ManageProducts from "./components/manageproducts";
 import EditProduct from "./components/editproduct";
 import ErrorPage from "./error";
+import ManageOrders from "./components/manageorders";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         path: "/products/:productId",
 
         element: <Products />,
+      },
+      {
+        path: "/manage-orders",
+        element: <ManageOrders />,
       },
     ],
   },

@@ -169,3 +169,42 @@ export async function deleteProduct(token, productId) {
     console.error(err);
   }
 }
+
+//////////////////
+
+/*orders*/
+
+/*GET /orders */
+export async function getOrders(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    const info = result.data.orders;
+    // console.log(result);
+    return info;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function getUsersOrders(token, userId) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    const info = result.data.orders;
+    console.log(info);
+    return info;
+  } catch (err) {
+    console.error(err);
+  }
+}
