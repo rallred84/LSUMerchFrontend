@@ -1,0 +1,28 @@
+#checkout-table {
+  border-collapse: collapse;
+  margin-left: 20px;
+}
+
+#checkout-table th,
+#checkout-table td {
+  border: 1px solid black;
+  width: 170px;
+  height: 70px;
+}
+
+#checkout-table th {
+  font-size: 20px;
+}
+
+.no-border {
+  border-top-style: hidden !important;
+  border-right-style: hidden !important;
+  border-bottom-style: hidden !important;
+}
+
+.delete-cart-product {
+  margin: 10px;
+  color: white;
+  background-color: red;
+  padding: 10px;
+}

@@ -76,7 +76,6 @@ export async function getAllProducts() {
     const result = await response.json();
     const info = result.data.products;
 
-
     // console.log(info)
 
     return info;
@@ -165,6 +164,50 @@ export async function deleteProduct(token, productId) {
     const result = await response.json();
     console.log(result);
     return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+/////////////////
+
+// POST /orders
+
+export async function createNewCart(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// POST /orders_products/add
+
+export async function addProductToCart(token, productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders_products/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId,
+        quantity: 1,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    const info = result.data.cart;
+    return info;
   } catch (err) {
     console.error(err);
   }

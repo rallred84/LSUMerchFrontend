@@ -1,14 +1,21 @@
 import { Link, useOutletContext } from "react-router-dom";
+import { addProductToCart, createNewCart, getProfile } from "../api";
 
 export default function Welcome() {
-  const { products } = useOutletContext();
+  const { products, user, setUser, token } = useOutletContext();
 
   if (!products) {
     return <></>;
   }
 
-  function addToCart() {
+  async function addToCart(productId) {
     alert("Added to cart");
+    if (!user.cart.id) {
+      await createNewCart(token);
+    }
+    await addProductToCart(token, productId);
+    const fetchMe = await getProfile(token);
+    setUser(fetchMe);
   }
   return (
     <div id="home_page">
@@ -16,7 +23,7 @@ export default function Welcome() {
       <div className="cards-container" key={products}>
         {products.length > 0
           ? products.map((product) => {
-              console.log(product);
+              // console.log(product);
               return (
                 <div id="card" key={product.id}>
                   <div className="products-pg">
@@ -33,7 +40,10 @@ export default function Welcome() {
                         Price: {product.price}
                       </div>
                     </Link>
-                    <button className="product-btn" onClick={addToCart}>
+                    <button
+                      className="product-btn"
+                      onClick={() => addToCart(product.id)}
+                    >
                       Add to Cart{" "}
                     </button>
                   </div>

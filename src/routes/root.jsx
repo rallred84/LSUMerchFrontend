@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { getAllProducts, getProfile } from "../api";
 import { createTheme } from "@mui/material/styles";
 
-
 //All Global state to be saved in this file and then exported to other components via Outlet Context
 
 const Root = () => {
@@ -62,6 +61,12 @@ const Root = () => {
     };
     fetchUser();
   }, [token]);
+
+  useEffect(() => {
+    if (user) {
+      console.log(user.cart);
+    }
+  }, [user]);
 
   if (isLoadingProducts) {
     return;
