@@ -63,12 +63,14 @@ const Root = () => {
     fetchUser();
   }, [token]);
   useEffect(() => {
-    const fetchOrders = async () => {
-      const fetchAllOrders = await getOrders(token);
-      console.log(fetchAllOrders);
-      setOrders(fetchAllOrders);
-    };
-    fetchOrders();
+    if (user.isAdmin) {
+      const fetchOrders = async () => {
+        const fetchAllOrders = await getOrders(token);
+        console.log(fetchAllOrders);
+        setOrders(fetchAllOrders);
+      };
+      fetchOrders();
+    }
   }, [token]);
 
   useEffect(() => {

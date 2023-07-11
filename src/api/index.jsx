@@ -191,7 +191,7 @@ export async function createReview(token, productId) {
     console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
 
@@ -213,7 +213,7 @@ export async function editReview(token, productId) {
     console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
 
@@ -231,13 +231,11 @@ export async function deleteReview(token, productId) {
     console.log(result);
     return result;
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 }
 
-
 //////////////////
-
 
 /*orders*/
 
@@ -259,6 +257,8 @@ export async function getOrders(token) {
   }
 }
 
+//GET /orders/:userId
+
 export async function getUsersOrders(token, userId) {
   try {
     const response = await fetch(`${BASE_URL}/orders/${userId}`, {
@@ -271,6 +271,48 @@ export async function getUsersOrders(token, userId) {
     const info = result.data.orders;
     console.log(info);
     return info;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+//POST /orders
+
+export async function createNewCart(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+////////// ORDERS_PRODUCTS
+
+//POST /orders_products/add
+
+export async function addProductToCart(token, productId) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders_products/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId,
+        quantity: 1,
+      }),
+    });
+    const result = await response.json();
+    return result;
   } catch (err) {
     console.error(err);
   }
