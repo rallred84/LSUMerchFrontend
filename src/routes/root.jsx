@@ -13,6 +13,7 @@ const Root = () => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [cart, setCart] = useState({});
   const [orders, setOrders] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
@@ -52,7 +53,7 @@ const Root = () => {
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoadingProducts(true);
-      const token = localStorage.getItem("token");
+      const token = window.localStorage.getItem("token");
       if (token) {
         setToken(token);
         const fetchMe = await getProfile(token);
@@ -62,6 +63,7 @@ const Root = () => {
     };
     fetchUser();
   }, [token]);
+
   useEffect(() => {
     if (user.isAdmin) {
       const fetchOrders = async () => {
@@ -78,6 +80,16 @@ const Root = () => {
       console.log(user.cart);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (!user.id) {
+      const cartString = window.localStorage.getItem("cart");
+      if (!cartString) {
+        window.localStorage.setItem("cart", JSON.stringify(cart));
+      }
+      console.log(JSON.parse(cartString));
+    }
+  }, []);
 
   if (isLoadingProducts) {
     return;
@@ -98,6 +110,8 @@ const Root = () => {
             token,
             user,
             setUser,
+            cart,
+            setCart,
             setProducts,
             isLoadingProducts,
             setIsLoadingProducts,

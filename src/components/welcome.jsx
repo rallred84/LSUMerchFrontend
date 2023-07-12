@@ -2,21 +2,65 @@ import { Link, useOutletContext } from "react-router-dom";
 import { addProductToCart, createNewCart, getProfile } from "../api";
 
 export default function Welcome() {
-  const { products, user, setUser, token } = useOutletContext();
+  const { products, user, setUser, cart, setCart, token } = useOutletContext();
 
   if (!products) {
     return <></>;
   }
 
-  async function addToCart(productId) {
-    alert("Added to cart");
+  async function addToCart(product) {
+    if (!user.id) {
+      addToAnonCart(product);
+      return;
+    }
+
     if (!user.cart.id) {
       await createNewCart(token);
     }
-    await addProductToCart(token, productId);
+    await addProductToCart(token, product.id);
     const fetchMe = await getProfile(token);
     setUser(fetchMe);
   }
+
+  function addToAnonCart(product) {
+    if (!cart?.products) {
+      console.log("no products yet");
+      cart.products = [
+        {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+        },
+      ];
+      console.log(cart);
+      window.localStorage.setItem("cart", JSON.stringify(cart));
+
+      return;
+    }
+    let alreadyInCart = false;
+    cart.products.forEach((p) => {
+      if (p.id === product.id) {
+        alreadyInCart = true;
+        return;
+      }
+    });
+
+    if (alreadyInCart) {
+      console.log("Item already in cart");
+      return;
+    }
+
+    cart.products.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+    });
+    console.log(cart);
+    window.localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
   return (
     <div id="home_page">
       <h1 id="welcome">Welcome To The Tigers Den!</h1>
@@ -42,7 +86,7 @@ export default function Welcome() {
                     </Link>
                     <button
                       className="product-btn"
-                      onClick={() => addToCart(product.id)}
+                      onClick={() => addToCart(product)}
                     >
                       Add to Cart{" "}
                     </button>

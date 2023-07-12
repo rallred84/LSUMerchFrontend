@@ -2,13 +2,16 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import tigersden from "../assets/tigersden.svg";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ user }) => {
+  const navigate = useNavigate();
+
   function checkout() {
-    window.location.href = "/checkout";
+    navigate("/checkout");
   }
   function account() {
-    window.location.href = "/account";
+    navigate("/account");
   }
 
   return (
