@@ -19,6 +19,7 @@ const theme = createTheme({
           padding: "8px 16px",
           fontWeight: "bold",
           transition: "background-color 0.3s ease-in-out",
+          fontSize: "16px",
 
           "&:hover": {
             backgroundColor: "#d29f13",
@@ -70,8 +71,8 @@ export default function Products() {
           <img src={product.imageURL} alt={product.name} />
         </div>
         <div className="product-info">
-          <div className="single-product-price">Price: {product.price}</div>
           <div className="product-description">{product.description}</div>
+          <div className="single-product-price">Price: {product.price}</div>
           <div className="product-page-btn">
             <ThemeProvider theme={theme}>
               <ButtonGroup orientation="vertical">
