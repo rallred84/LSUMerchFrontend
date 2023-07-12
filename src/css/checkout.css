@@ -1,32 +1,49 @@
 #checkout-table {
-  border-collapse: collapse;
   margin-left: 20px;
 }
 
-#checkout-table th,
-#checkout-table td {
-  border: 1px solid black;
-  width: 170px;
-  height: 70px;
+.grid {
+  display: grid;
+  color: #444;
+  height: 50px;
 }
 
-#checkout-table th {
+.grid > div {
+  background-color: #fff;
+  outline: 1px solid black;
+}
+
+.grid > div,
+.grid > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-head {
+  grid-template-columns: 70px 300px 140px 140px 140px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.checkout-body {
+  grid-template-columns: 70px 300px 140px 140px 140px 50px;
   font-size: 20px;
 }
-
-.no-border {
-  border-top-style: hidden !important;
-  border-right-style: hidden !important;
-  border-bottom-style: hidden !important;
+.checkout-total {
+  grid-template-columns: 70px 300px 140px 140px 140px 50px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.delete-cart-product {
-  margin: 10px;
-  color: white;
+.delete-cart-button {
   background-color: red;
-  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  margin: 10px;
+  border-radius: 10px;
 }
 
-.delete-cart-product:hover {
+.delete-cart-button:hover {
   cursor: pointer;
 }

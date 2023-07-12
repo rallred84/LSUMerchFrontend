@@ -339,3 +339,25 @@ export async function removeFromCart(productId, token) {
     console.error(err);
   }
 }
+
+//PATCH /orders_products/update
+export async function updateCartItemQuantity(token, productId, quantity) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders_products/update`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId,
+        quantity,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
