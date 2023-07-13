@@ -76,7 +76,7 @@ const Root = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user.cart);
+      // console.log(user.cart);
     }
   }, [user]);
 

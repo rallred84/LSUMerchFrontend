@@ -1,8 +1,9 @@
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
+import { deleteReview } from "../api";
 
 const Account = () => {
-  const { user, setToken, setUser } = useOutletContext();
+  const { user, setToken, setUser, token } = useOutletContext();
 
   function admin() {
     window.location.href = "/admin";
@@ -12,6 +13,11 @@ const Account = () => {
     localStorage.removeItem("token");
     setToken("");
     setUser({});
+  }
+
+  async function handleDelete(productId) {
+    const result = await deleteReview(token, productId);
+    console.log(result);
   }
 
   return (
@@ -43,7 +49,37 @@ const Account = () => {
             <div id="order-id" key={order.id}>
               <div className="order-id">Id: {order.id}</div>
               <div className="order-status">Status: {order.orderStatus}</div>
+              {order.products && order.products.length
+              ? order.products.map((product) => {
+                return (
+                  <div key={product.id}>
+                    <div className="product">{product.name}</div>
+                    <div className="product-quantity">Quantity: {product.quantity}</div>
+                  </div>
+                )
+              })
+            : null }
               <div className="order-price">Total: {order.totalPrice}</div>
+            </div>
+          );
+         })
+        : null}
+      </div>
+      <div>
+        <h1>My Reviews</h1>
+        {user.reviews && user.reviews.length
+         ? user.reviews.map((review) => {
+          // console.log(review);
+          return (
+            <div id="review-id" key={review.id}>
+              <div className="review-product">{review.productName}</div>
+              <div className="review-message">{review.message}</div>
+              <div className="review-rating">Rating: {review.rating}</div>
+              <div className="review-date">Date: {review.date}</div>
+              <Link to={`/${review.productId}/editreview`}>
+              <button>Edit Review</button>
+              </Link>
+              <button onClick={() => handleDelete(review.productId)}>Delete Review</button>
             </div>
           );
          })

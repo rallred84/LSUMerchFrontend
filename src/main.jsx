@@ -69,6 +69,14 @@ const router = createBrowserRouter([
         path: "/all-products",
         element: <AllProducts />,
       },
+      {
+        path: "/reviews/:productId",
+        element: <CreateReview />,
+      },
+      {
+        path: "/:productId/editreview",
+        element: <EditReview />,
+      },
     ],
   },
 ]);
