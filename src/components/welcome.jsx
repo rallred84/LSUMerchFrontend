@@ -4,8 +4,10 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Button } from "@mui/material";
 
 export default function Welcome() {
+
   const { products, user, setUser, token, cart, setCart, theme } =
     useOutletContext();
+
 
   if (!products) {
     return <></>;
@@ -15,7 +17,6 @@ export default function Welcome() {
       addToAnonCart(product);
       return;
     }
-
     if (!user.cart.id) {
       await createNewCart(token);
     }

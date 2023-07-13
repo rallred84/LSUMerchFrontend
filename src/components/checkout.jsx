@@ -4,13 +4,8 @@ import { useEffect, useState } from "react";
 import { removeFromCart, getProfile, updateCartItemQuantity } from "../api";
 
 const Checkout = () => {
-  const { user, setUser, token } = useOutletContext();
-  const [cart, setCart] = useState({});
+  const { user, setUser, cart, setCart, token } = useOutletContext();
   const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    setCart(user.cart);
-  }, [user]);
 
   useEffect(() => {
     if (cart?.products) {
@@ -23,15 +18,42 @@ const Checkout = () => {
   }, [cart]);
 
   const handleRemoveFromCart = async (productId) => {
-    await removeFromCart(productId, token);
-    const fetchMe = await getProfile(token);
-    setUser(fetchMe);
+    if (user.id) {
+      await removeFromCart(productId, token);
+      const fetchMe = await getProfile(token);
+      setUser(fetchMe);
+    } else {
+      const newProducts = cart.products.filter(
+        (product) => product.id !== productId
+      );
+      setCart({ products: newProducts });
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify({ products: newProducts })
+      );
+    }
   };
 
   const handleEditItemQuantity = async (quantity, productId) => {
-    await updateCartItemQuantity(token, productId, quantity);
-    const fetchMe = await getProfile(token);
-    setUser(fetchMe);
+    if (user.id) {
+      await updateCartItemQuantity(token, productId, quantity);
+      const fetchMe = await getProfile(token);
+      setUser(fetchMe);
+    } else {
+      const newProducts = cart.products.map((product) => {
+        if (product.id === productId) {
+          product.quantity = quantity;
+          return product;
+        } else {
+          return product;
+        }
+      });
+      setCart({ products: newProducts });
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify({ products: newProducts })
+      );
+    }
   };
 
   return (

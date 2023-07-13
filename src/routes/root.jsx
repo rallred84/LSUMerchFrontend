@@ -13,6 +13,7 @@ const Root = () => {
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState("");
   const [user, setUser] = useState({});
+  const [cart, setCart] = useState({});
   const [orders, setOrders] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
 
@@ -37,32 +38,60 @@ const Root = () => {
     },
   });
 
+  //Use Effect for Fetching all Products and initial user when page first loads
   useEffect(() => {
-    const fetchAllProducts = async () => {
+    (async () => {
       setIsLoadingProducts(true);
       const fetchProducts = await getAllProducts();
       setProducts(fetchProducts);
       if (fetchProducts) {
         setIsLoadingProducts(false);
       }
-    };
-
-    fetchAllProducts();
+      const tokenInStorage = window.localStorage.getItem("token");
+      setToken(tokenInStorage);
+      // if (!tokenInStorage) {
+      //   window.localStorage.setItem("cart", JSON.stringify({ products: [] }));
+      // }
+    })();
+    // };
   }, []);
 
+  //After Token is assigned, fetch user
   useEffect(() => {
-    const fetchUser = async () => {
-      setIsLoadingProducts(true);
-      const token = localStorage.getItem("token");
+    (async () => {
       if (token) {
         setToken(token);
         const fetchMe = await getProfile(token);
         setUser(fetchMe);
-        setIsLoadingProducts(false);
       }
-    };
-    fetchUser();
+    })();
   }, [token]);
+
+  //After user logs in, set user's cart
+  useEffect(() => {
+    if (user.id) {
+      setCart(user.cart);
+      //Will add merging cart functionality here later
+      window.localStorage.removeItem("cart");
+    } else {
+      const cartString = window.localStorage.getItem("cart");
+      console.log(cartString);
+      if (cartString) {
+        setCart(JSON.parse(cartString));
+      } else {
+        setCart({ products: [] });
+        window.localStorage.setItem("cart", JSON.stringify({ products: [] }));
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (cart.products) {
+      console.log(cart);
+    }
+  }, [cart]);
+
+  //Lets move this useEffect to the admin dashboard
   useEffect(() => {
     if (user.isAdmin) {
       const fetchOrders = async () => {
@@ -74,16 +103,9 @@ const Root = () => {
     }
   }, [token]);
 
-  useEffect(() => {
-    if (user) {
-      // console.log(user.cart);
-    }
-  }, [user]);
 
   if (isLoadingProducts) {
-    return;
-
-    <>Loading...</>;
+    return <>Loading...</>;
   }
 
   return (
@@ -99,6 +121,8 @@ const Root = () => {
             token,
             user,
             setUser,
+            cart,
+            setCart,
             setProducts,
             isLoadingProducts,
             setIsLoadingProducts,
