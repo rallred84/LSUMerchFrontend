@@ -15,6 +15,8 @@ import EditProduct from "./components/editproduct";
 import ErrorPage from "./error";
 import ManageOrders from "./components/manageorders";
 import AllProducts from "./components/allproducts";
+import CreateReview from "./components/newreview";
+import EditReview from "./components/editreview"
 
 const router = createBrowserRouter([
   {
