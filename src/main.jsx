@@ -14,6 +14,7 @@ import ManageProducts from "./components/manageproducts";
 import EditProduct from "./components/editproduct";
 import ErrorPage from "./error";
 import ManageOrders from "./components/manageorders";
+import AllProducts from "./components/allproducts";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/manage-orders",
         element: <ManageOrders />,
+      },
+      {
+        path: "/all-products",
+        element: <AllProducts />,
       },
     ],
   },

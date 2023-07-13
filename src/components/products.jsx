@@ -4,6 +4,7 @@ import { getAllProducts } from "../api";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { addProductToCart, createNewCart, getProfile } from "../api";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -32,7 +33,7 @@ const theme = createTheme({
 
 export default function Products() {
   const { productId } = useParams();
-
+  const { products, user, setUser, token, theme } = useOutletContext();
   const [loading, setLoading] = useState(true);
 
   const [product, setProduct] = useState({});
@@ -55,9 +56,16 @@ export default function Products() {
     singleProduct();
   }, [productId]);
 
-  function addToCart() {
-    alert("Product added to cart");
+  async function addToCart(productId) {
+    alert("Added to cart");
+    if (!user.cart.id) {
+      await createNewCart(token);
+    }
+    await addProductToCart(token, productId);
+    const fetchMe = await getProfile(token);
+    setUser(fetchMe);
   }
+
   if (loading) {
     return;
     <> Loading...</>;
@@ -76,7 +84,10 @@ export default function Products() {
           <div className="product-page-btn">
             <ThemeProvider theme={theme}>
               <ButtonGroup orientation="vertical">
-                <Button onClick={addToCart} className="single-product-btn">
+                <Button
+                  onClick={() => addToCart(product.id)}
+                  className="product-btn"
+                >
                   Add to Cart
                 </Button>{" "}
                 <br />
