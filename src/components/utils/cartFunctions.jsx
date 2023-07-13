@@ -1,9 +1,17 @@
 import { addProductToCart, getProfile } from "../../api";
 
-export async function addToCart(e, product, user, cart, setUser, token) {
+export async function addToCart(
+  e,
+  product,
+  user,
+  setUser,
+  cart,
+  setCart,
+  token
+) {
   e.stopPropagation();
   if (!user.id) {
-    addToAnonCart(product, cart);
+    addToAnonCart(product, cart, setCart);
     return;
   }
   if (!user.cart.id) {
@@ -14,22 +22,7 @@ export async function addToCart(e, product, user, cart, setUser, token) {
   setUser(fetchMe);
 }
 
-export function addToAnonCart(product, cart) {
-  if (!cart?.products) {
-    console.log("no products yet");
-    cart.products = [
-      {
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        quantity: 1,
-      },
-    ];
-    console.log(cart);
-    window.localStorage.setItem("cart", JSON.stringify(cart));
-
-    return;
-  }
+export function addToAnonCart(product, cart, setCart) {
   let alreadyInCart = false;
   cart.products.forEach((p) => {
     if (p.id === product.id) {
@@ -43,12 +36,21 @@ export function addToAnonCart(product, cart) {
     return;
   }
 
-  cart.products.push({
+  const newCart = { ...cart };
+
+  newCart.products.push({
     id: product.id,
     name: product.name,
     price: product.price,
     quantity: 1,
   });
-  console.log(cart);
-  window.localStorage.setItem("cart", JSON.stringify(cart));
+
+  // cart.products.push({
+  //   id: product.id,
+  //   name: product.name,
+  //   price: product.price,
+  //   quantity: 1,
+  // });
+  setCart(newCart);
+  window.localStorage.setItem("cart", JSON.stringify(newCart));
 }

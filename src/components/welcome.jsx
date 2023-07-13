@@ -37,7 +37,7 @@ export default function Welcome() {
                   <Button
                     className="product-btn"
                     onClick={(e) =>
-                      addToCart(e, product, user, cart, setUser, token)
+                      addToCart(e, product, user, setUser, cart, setCart, token)
                     }
                   >
                     Add to Cart

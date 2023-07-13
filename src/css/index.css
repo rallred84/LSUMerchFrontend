@@ -163,6 +163,7 @@
   /* Using flex grow to make main body section take up all available vertical space (but not more than that) */
   flex: 1 0 0;
   background-color: #d0d0ce;
+  overflow: auto;
 }
 #welcome {
   display: flex;

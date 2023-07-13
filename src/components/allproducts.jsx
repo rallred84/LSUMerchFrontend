@@ -1,10 +1,14 @@
-import { Link, useOutletContext } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { addProductToCart, createNewCart, getProfile } from "../api";
 import { ThemeProvider } from "@mui/material/styles";
 import { Button } from "@mui/material";
+import { addToCart } from "./utils/cartFunctions";
 
 export default function AllProducts() {
-  const { products, user, setUser, token, theme } = useOutletContext();
+  const { products, user, setUser, cart, setCart, token, theme } =
+    useOutletContext();
+
+  const navigate = useNavigate();
 
   if (!products) {
     return <></>;
@@ -44,21 +48,28 @@ export default function AllProducts() {
       <div className="cards-container">
         {products.length > 0 ? (
           products.map((product) => (
-            <div id="card" key={product.id} className="product-card">
-              <Link
-                to={`/products/${product.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <h1 className="product-name">{product.name}</h1>
-                <div className="product-image">
-                  <img src={product.imageURL} alt={products.name} />
-                </div>
-                <div className="product-price">Price: {product.price}</div>
+            <div
+              id="card"
+              key={product.id}
+              className="product-card"
+              onClick={() => navigate(`/products/${product.id}`)}
+            >
+              <h1 className="product-name">{product.name}</h1>
+              <div className="product-image">
+                <img src={product.imageURL} alt={products.name} />
+              </div>
+              <div className="product-price">Price: {product.price}</div>
 
-                <ThemeProvider theme={theme}>
-                  <Button className="view-product-btn">View Product</Button>{" "}
-                </ThemeProvider>
-              </Link>
+              <ThemeProvider theme={theme}>
+                <Button
+                  className="product-btn"
+                  onClick={(e) =>
+                    addToCart(e, product, user, setUser, cart, setCart, token)
+                  }
+                >
+                  Add to Cart
+                </Button>
+              </ThemeProvider>
             </div>
           ))
         ) : (

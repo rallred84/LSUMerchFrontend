@@ -103,14 +103,13 @@ const Root = () => {
     }
   }, [token]);
 
-
   if (isLoadingProducts) {
     return <>Loading...</>;
   }
 
   return (
     <>
-      <Header user={user} setUser={setUser} setToken={setToken} />
+      <Header user={user} setUser={setUser} setToken={setToken} cart={cart} />
       <Nav user={user} setUser={setUser} setToken={setToken} />
       <div id="main">
         <Outlet

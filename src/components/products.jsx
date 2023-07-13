@@ -33,7 +33,7 @@ const theme = createTheme({
 
 export default function Products() {
   const { productId } = useParams();
-  const { cart, user, setUser, token, theme } = useOutletContext();
+  const { cart, setCart, user, setUser, token, theme } = useOutletContext();
   const [loading, setLoading] = useState(true);
 
   const [product, setProduct] = useState({});
@@ -76,7 +76,7 @@ export default function Products() {
               <ButtonGroup orientation="vertical">
                 <Button
                   onClick={(e) =>
-                    addToCart(e, product, user, cart, setUser, token)
+                    addToCart(e, product, user, setUser, cart, setCart, token)
                   }
                   className="product-btn"
                 >

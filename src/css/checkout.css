@@ -2,6 +2,19 @@
   margin-left: 20px;
 }
 
+#cart-count {
+  background-color: red;
+  color: white;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-left: -28px;
+  margin-top: -38px;
+}
+
 .grid {
   display: grid;
   color: #444;
