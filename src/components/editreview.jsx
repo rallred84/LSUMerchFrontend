@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { createReview } from "../api";
+import { editReview } from "../api";
 
-export default function CreateReview() {
+export default function EditReview() {
     const [message, setMessage] = useState("");
     const [rating, setRating] = useState(0);
 
@@ -16,7 +16,7 @@ export default function CreateReview() {
         event.preventDefault();
         try {
           if (user) {
-            const result = await createReview(token, productId, message, rating);
+            const result = await editReview(token, productId, message, rating);
             console.log(result);
             navigate("/")
         }
@@ -27,7 +27,7 @@ export default function CreateReview() {
 
     return(
         <div>
-            <h1>Leave A Review</h1>
+            <h1>Edit Review</h1>
             <form onSubmit={handleReview} id="new-review">
               <input
                 placeholder="Message"
@@ -40,7 +40,7 @@ export default function CreateReview() {
                 onChange={(event) => setRating(event.target.value)}
                 value={rating}
               />
-              <button>Leave Review</button>  
+              <button>Edit Review</button>  
             </form>
         </div>
     )
