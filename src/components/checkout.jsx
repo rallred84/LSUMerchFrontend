@@ -8,18 +8,6 @@ const Checkout = () => {
   const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    if (user.id) {
-      setCart(user.cart);
-    } else {
-      const cartString = window.localStorage.getItem("cart");
-      console.log(cartString);
-      if (cartString) {
-        setCart(JSON.parse(cartString));
-      }
-    }
-  }, [user]);
-
-  useEffect(() => {
     if (cart?.products) {
       setProductList(
         cart.products.sort(function (a, b) {
@@ -51,16 +39,21 @@ const Checkout = () => {
       await updateCartItemQuantity(token, productId, quantity);
       const fetchMe = await getProfile(token);
       setUser(fetchMe);
+    } else {
+      const newProducts = cart.products.map((product) => {
+        if (product.id === productId) {
+          product.quantity = quantity;
+          return product;
+        } else {
+          return product;
+        }
+      });
+      setCart({ products: newProducts });
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify({ products: newProducts })
+      );
     }
-    const newProducts = cart.products.map((product) => {
-      if (product.id === productId) {
-        product.quantity = quantity;
-        return product;
-      } else {
-        return product;
-      }
-    });
-    setCart({ products: newProducts });
   };
 
   return (

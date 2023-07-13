@@ -68,13 +68,13 @@ const Root = () => {
 
   //After user logs in, set user's cart
   useEffect(() => {
-    if (user?.id) {
+    if (user.id) {
       setCart(user.cart);
-      console.log(user.cart);
       //Will add merging cart functionality here later
       window.localStorage.removeItem("cart");
     } else {
       const cartString = window.localStorage.getItem("cart");
+      console.log(cartString);
       if (cartString) {
         setCart(JSON.parse(cartString));
       } else {
