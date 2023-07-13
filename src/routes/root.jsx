@@ -25,6 +25,7 @@ const Root = () => {
             backgroundColor: "#3c1053",
             color: "white",
             textTransform: "none",
+            fontSize: "1rem",
 
             "&:hover": {
               backgroundColor: "#d29f13",
@@ -101,6 +102,7 @@ const Root = () => {
       fetchOrders();
     }
   }, [token]);
+
 
   if (isLoadingProducts) {
     return <>Loading...</>;

@@ -58,7 +58,7 @@ export async function getProfile(token) {
     });
     const result = await response.json();
     const info = result.data.user;
-    // console.log(info);
+    console.log(info);
     return info;
   } catch (err) {
     console.error(err);
@@ -174,7 +174,7 @@ export async function deleteProduct(token, productId) {
 /*reviews*/
 
 /*POST /reviews/:productId */
-export async function createReview(token, productId) {
+export async function createReview(token, productId, message, rating) {
   try {
     const response = await fetch(`${BASE_URL}/reviews/${productId}`, {
       method: "POST",
@@ -196,7 +196,7 @@ export async function createReview(token, productId) {
 }
 
 /*PATCH /reviews/:productId */
-export async function editReview(token, productId) {
+export async function editReview(token, productId, message, rating) {
   try {
     const response = await fetch(`${BASE_URL}/reviews/${productId}`, {
       method: "PATCH",

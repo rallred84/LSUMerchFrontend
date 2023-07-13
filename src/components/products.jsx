@@ -1,15 +1,39 @@
 import { useOutletContext, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { BASE_URL, getAllProducts } from "../api";
+import { getAllProducts } from "../api";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { addProductToCart, createNewCart, getProfile } from "../api";
 
-import { ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#3c1053",
+          color: "white",
+          textTransform: "none",
+          borderRadius: "4px",
+          padding: "8px 16px",
+          fontWeight: "bold",
+          transition: "background-color 0.3s ease-in-out",
+          fontSize: "16px",
+
+          "&:hover": {
+            backgroundColor: "#d29f13",
+          },
+        },
+      },
+    },
+  },
+});
 
 export default function Products() {
   const { productId } = useParams();
-  const { theme } = useOutletContext();
-
+  const { products, user, setUser, token, theme } = useOutletContext();
   const [loading, setLoading] = useState(true);
 
   const [product, setProduct] = useState({});
@@ -32,9 +56,16 @@ export default function Products() {
     singleProduct();
   }, [productId]);
 
-  function addToCart() {
-    alert("Product added to cart");
+  async function addToCart(productId) {
+    alert("Added to cart");
+    if (!user.cart.id) {
+      await createNewCart(token);
+    }
+    await addProductToCart(token, productId);
+    const fetchMe = await getProfile(token);
+    setUser(fetchMe);
   }
+
   if (loading) {
     return;
     <> Loading...</>;
@@ -43,21 +74,32 @@ export default function Products() {
   return (
     <div id="product-pg">
       <h1 className="single-product-name">{product.name}</h1>
-      <div className="product-description">{product.description}</div>
-      <div className="single-product-image">
-        <img src={product.imageURL} alt={product.name} />
-      </div>
-      <div className="single-product-price">Price: {product.price}</div>
-      <div className="product-page-btn">
-        <ThemeProvider theme={theme}>
-          <Button onClick={addToCart} className="single-product-btn">
-            Add to Cart
-          </Button>{" "}
-          <br />
-          <Link to="/">
-          <Button className="single-product-btn">Back to Products</Button>{" "}
-          </Link>
-        </ThemeProvider>
+      <div className="product-details">
+        <div className="single-product-image">
+          <img src={product.imageURL} alt={product.name} />
+        </div>
+        <div className="product-info">
+          <div className="product-description">{product.description}</div>
+          <div className="single-product-price">Price: {product.price}</div>
+          <div className="product-page-btn">
+            <ThemeProvider theme={theme}>
+              <ButtonGroup orientation="vertical">
+                <Button
+                  onClick={() => addToCart(product.id)}
+                  className="product-btn"
+                >
+                  Add to Cart
+                </Button>{" "}
+                <br />
+                <Link to="/">
+                  <Button className="single-product-btn">
+                    Back to Products
+                  </Button>{" "}
+                </Link>
+              </ButtonGroup>
+            </ThemeProvider>
+          </div>
+        </div>
       </div>
     </div>
   );

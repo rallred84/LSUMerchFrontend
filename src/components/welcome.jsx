@@ -1,19 +1,22 @@
 import { Link, useOutletContext } from "react-router-dom";
-import { addProductToCart, createNewCart, getProfile } from "../api";
+
+import { ThemeProvider } from "@mui/material/styles";
+import { Button } from "@mui/material";
 
 export default function Welcome() {
-  const { products, user, setUser, cart, setCart, token } = useOutletContext();
+
+  const { products, user, setUser, token, cart, setCart, theme } =
+    useOutletContext();
+
 
   if (!products) {
     return <></>;
   }
-
   async function addToCart(product) {
     if (!user.id) {
       addToAnonCart(product);
       return;
     }
-
     if (!user.cart.id) {
       await createNewCart(token);
     }
@@ -64,37 +67,36 @@ export default function Welcome() {
   return (
     <div id="home_page">
       <h1 id="welcome">Welcome To The Tigers Den!</h1>
-      <div className="cards-container" key={products}>
-        {products.length > 0
-          ? products.map((product) => {
-              // console.log(product);
-              return (
-                <div id="card" key={product.id}>
-                  <div className="products-pg">
-                    <Link
-                      to={`/products/${product.id}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <h1 className="product-name">{product.name}</h1>
+      <div className="home-page-container">
+        <div className="cards-container">
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div id="card" key={product.id} className="product-card">
+                <Link
+                  to={`/products/${product.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <h1 className="product-name">{product.name}</h1>
+                  <div className="product-image">
+                    <img src={product.imageURL} alt={products.name} />
+                  </div>
+                  <div className="product-price">Price: {product.price}</div>
 
-                      <div className="product-image">
-                        <img src={product.imageURL} alt={products.name} />
-                      </div>
-                      <div className="product-price">
-                        Price: {product.price}
-                      </div>
-                    </Link>
-                    <button
+                  <ThemeProvider theme={theme}>
+                    <Button
                       className="product-btn"
                       onClick={() => addToCart(product)}
                     >
                       Add to Cart{" "}
-                    </button>
-                  </div>
-                </div>
-              );
-            })
-          : null}
+                    </Button>{" "}
+                  </ThemeProvider>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div>No products available</div>
+          )}
+        </div>
       </div>
     </div>
   );
