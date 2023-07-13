@@ -39,6 +39,10 @@ const Checkout = () => {
         (product) => product.id !== productId
       );
       setCart({ products: newProducts });
+      window.localStorage.setItem(
+        "cart",
+        JSON.stringify({ products: newProducts })
+      );
     }
   };
 
