@@ -4,6 +4,7 @@ import { getAllProducts } from "../api";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import { addProductToCart, createNewCart, getProfile } from "../api";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -55,9 +56,16 @@ export default function Products() {
     singleProduct();
   }, [productId]);
 
-  function addToCart() {
-    alert("Product added to cart");
+  async function addToCart(productId) {
+    alert("Added to cart");
+    if (!user.cart.id) {
+      await createNewCart(token);
+    }
+    await addProductToCart(token, productId);
+    const fetchMe = await getProfile(token);
+    setUser(fetchMe);
   }
+
   if (loading) {
     return;
     <> Loading...</>;
