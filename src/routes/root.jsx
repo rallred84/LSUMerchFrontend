@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import { getAllProducts, getOrders, getProfile } from "../api";
 import { createTheme } from "@mui/material/styles";
 
+import toast, { Toaster } from "react-hot-toast";
+
+export const inCartToast = () => toast("Item Already In Cart");
+
 //All Global state to be saved in this file and then exported to other components via Outlet Context
 
 const Root = () => {
@@ -128,6 +132,17 @@ const Root = () => {
             orders,
             setOrders,
           }}
+        />
+        <Toaster
+          toastOptions={{
+            style: {
+              backgroundColor: "#f1eedb",
+              color: "#461d7c",
+              width: "1000px",
+              fontSize: "30px",
+            },
+          }}
+          position="bottom-center"
         />
       </div>
     </>

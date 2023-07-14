@@ -8,6 +8,8 @@ import { addToCart } from "../components/utils/cartFunctions";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+import { inCartToast } from "../routes/root";
+
 const theme = createTheme({
   components: {
     MuiButton: {
@@ -76,7 +78,16 @@ export default function Products() {
               <ButtonGroup orientation="vertical">
                 <Button
                   onClick={(e) =>
-                    addToCart(e, product, user, setUser, cart, setCart, token)
+                    addToCart(
+                      e,
+                      product,
+                      user,
+                      setUser,
+                      cart,
+                      setCart,
+                      token,
+                      inCartToast
+                    )
                   }
                   className="product-btn"
                 >

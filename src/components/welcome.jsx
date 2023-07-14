@@ -4,6 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { Button } from "@mui/material";
 import { addToCart } from "../components/utils/cartFunctions";
 
+import { inCartToast } from "../routes/root";
+
 export default function Welcome() {
   const { products, user, setUser, token, cart, setCart, theme } =
     useOutletContext();
@@ -36,9 +38,18 @@ export default function Welcome() {
                 <ThemeProvider theme={theme}>
                   <Button
                     className="product-btn"
-                    onClick={(e) =>
-                      addToCart(e, product, user, setUser, cart, setCart, token)
-                    }
+                    onClick={(e) => {
+                      addToCart(
+                        e,
+                        product,
+                        user,
+                        setUser,
+                        cart,
+                        setCart,
+                        token,
+                        inCartToast
+                      );
+                    }}
                   >
                     Add to Cart
                   </Button>

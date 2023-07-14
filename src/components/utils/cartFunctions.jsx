@@ -7,9 +7,25 @@ export async function addToCart(
   setUser,
   cart,
   setCart,
-  token
+  token,
+  inCartToast
 ) {
   e.stopPropagation();
+
+  let alreadyInCart = false;
+  cart.products.forEach((p) => {
+    if (p.id === product.id) {
+      alreadyInCart = true;
+      return;
+    }
+  });
+
+  if (alreadyInCart) {
+    console.log("Item already in cart");
+    inCartToast();
+    return;
+  }
+
   if (!user.id) {
     addToAnonCart(product, cart, setCart);
     return;
@@ -23,19 +39,6 @@ export async function addToCart(
 }
 
 export function addToAnonCart(product, cart, setCart) {
-  let alreadyInCart = false;
-  cart.products.forEach((p) => {
-    if (p.id === product.id) {
-      alreadyInCart = true;
-      return;
-    }
-  });
-
-  if (alreadyInCart) {
-    console.log("Item already in cart");
-    return;
-  }
-
   const newCart = { ...cart };
 
   newCart.products.push({
