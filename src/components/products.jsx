@@ -1,6 +1,6 @@
-import { useOutletContext, Link } from "react-router-dom";
+import { useOutletContext, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../api";
+import { getAllProducts, createReview } from "../api";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -40,12 +40,36 @@ export default function Products() {
 
   const [product, setProduct] = useState({});
 
+  const [reviewForm, setReviewForm] = useState(false);
+  const [message, setMessage] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const navigate = useNavigate();
+
+  const showReviewForm = async () => {
+    setReviewForm(!reviewForm)
+  };
+
+  async function handleReview(event) {
+    event.preventDefault();
+    try {
+      if (user) {
+        const result = await createReview(token, productId, message, rating);
+        console.log(result);
+        navigate('/all-products')
+    }
+    } catch (err) {
+      console.error(err)  
+    }
+  }
+
   const singleProduct = async () => {
     try {
       setLoading(true);
       const products = await getAllProducts(productId);
 
       const product = products.find((product) => product.id == productId);
+      console.log(product)
       setProduct(product);
 
       setLoading(false);
@@ -99,8 +123,55 @@ export default function Products() {
                     Back to Products
                   </Button>{" "}
                 </Link>
+                <br />
+                {user?.id && (
+                <>
+                <Button onClick={showReviewForm} className="review-product-btn">
+                    Review Product
+                </Button>{" "}
+                  </>
+                )}
               </ButtonGroup>
             </ThemeProvider>
+            {reviewForm && (
+            <div>
+            <h1>Leave A Review</h1>
+            <form onSubmit={handleReview} id="new-review">
+              <input
+                placeholder="Message"
+                onChange={(event) => setMessage(event.target.value)}
+                value={message}
+                minLength={15}
+              />
+              <input
+                placeholder="Rating"
+                onChange={(event) => setRating(event.target.value)}
+                value={rating}
+              />
+              <button>Leave Review</button>  
+            </form>
+            </div>
+            )}
+            {product.reviews.length > 0 && (
+            <>
+            <div>
+              <h1>Reviews</h1>
+              {product.reviews && product.reviews.length
+              ? product.reviews.map((review) => {
+                return(
+                  <div key={review.id}>
+                    <div className="review-creator">{review.creatorName}</div>
+                    <div className="review-date">Posted: {review.date}</div>
+                    <div className="review-message">{review.message}</div>
+                    <div className="review-rating">Rating: {review.rating}</div>
+                  </div>
+                )
+              })
+            : null}
+            </div>
+            </>
+            ) 
+          }
           </div>
         </div>
       </div>
