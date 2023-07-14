@@ -39,10 +39,10 @@ const Nav = () => {
             </Link>
 
             <Link to="/login" style={{ textDecoration: "none" }}>
-              Login
+              Shop All Products
             </Link>
             <Link to="/login" style={{ textDecoration: "none" }}>
-              Register
+              Login/Register
             </Link>
           </div>
         </div>
