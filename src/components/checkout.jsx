@@ -2,6 +2,8 @@ import { useOutletContext } from "react-router-dom";
 import "../css/checkout.css";
 import { useEffect, useState } from "react";
 import { removeFromCart, getProfile, updateCartItemQuantity } from "../api";
+import { IconButton } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const Checkout = () => {
   const { user, setUser, cart, setCart, token } = useOutletContext();
@@ -58,22 +60,27 @@ const Checkout = () => {
 
   return (
     <>
-      <div>
-        <h1>Welcome to Checkout, {user.firstName}</h1>
+      <div className="checkout-page">
+        <h1 className="checkout-heading">
+          Ready to Checkout {user.firstName} ?
+        </h1>
       </div>
       <div id="checkout-table">
         <div className="grid checkout-head">
           <div>Item Id</div>
           <div>Item Name</div>
-          <div>Item Quanity</div>
+          <div>Item Quantity</div>
           <div>Item Price</div>
           <div>Item Total</div>
+          <div>Remove Item</div>
         </div>
         {productList[0] &&
           productList.map((product) => {
             return (
               <div key={product.id} className="grid checkout-body">
-                <div>{product.id}</div>
+                <div className="product-thumbnail">
+                  <img src={product.imageURL} alt={product.name} />
+                </div>
                 <div>{product.name}</div>
                 <div>
                   <select
@@ -95,16 +102,14 @@ const Checkout = () => {
                   ${Number(product.price.slice(1)) * Number(product.quantity)}
                   .00
                 </div>
-                <span
-                  className="delete-cart-button"
-                  onClick={() => handleRemoveFromCart(product.id)}
-                >
-                  X
-                </span>
+                <div className="delete-cart-button">
+                  <IconButton onClick={() => handleRemoveFromCart(product.id)}>
+                    <ClearIcon color="error" />
+                  </IconButton>
+                </div>
               </div>
             );
           })}
-
         <div className="grid checkout-total">
           <div></div>
           <div></div>
@@ -112,6 +117,9 @@ const Checkout = () => {
           <div>Total</div>
           <div>{user.cart && user.cart.totalPrice}</div>
         </div>
+      </div>
+      <div className="checkout-button">
+        <button>Proceed to Payment</button>
       </div>
     </>
   );
