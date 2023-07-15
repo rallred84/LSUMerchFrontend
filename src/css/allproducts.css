@@ -1,0 +1,31 @@
+#all-products {
+  display: flex;
+}
+
+.cards-container {
+  flex-wrap: wrap;
+  overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: #d0d0ce;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.cards-container > .product-card {
+  flex: 1 0 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  min-width: 270px;
+}
+
+.category-button {
+  margin: 20px !important;
+  font-size: 22px !important;
+  font-family: daggersquare !important;
+}

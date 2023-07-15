@@ -21,7 +21,7 @@ export default function Welcome() {
     console.log(products);
     const featuredProducts = products.filter((product) => product.isFeatured);
     const displayedProducts = featuredProducts.sort(() => Math.random() - 0.5);
-    setFeatured(displayedProducts.slice(0, 6));
+    setFeatured(displayedProducts.slice(0, 4));
   }, []);
 
   if (!products) {
@@ -30,7 +30,6 @@ export default function Welcome() {
 
   return (
     <div id="home-page">
-      <h1 id="welcome">Welcome To The Tigers Den!</h1>
       <h2 id="featured-header">Check Out Some of Today's Featured Items!</h2>
       <div className="home-cards-container">
         {featured.length > 0 ? (
@@ -43,7 +42,7 @@ export default function Welcome() {
             >
               <h1 className="product-name">{product.name}</h1>
               <img
-                className="home-product-image"
+                className="product-image"
                 src={product.imageURL}
                 alt={products.name}
               />

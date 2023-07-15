@@ -2,17 +2,16 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { createUser, loginUser } from "../api";
-import { FormGroup, TextField, colors, Box } from "@mui/material";
-import Input from "@mui/material/Input";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { FormGroup, TextField } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
 
 export default function Login() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginConfirm, setLoginConfirm] = useState("");
+
+  const [registerVisible, setRegisterVisible] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -29,7 +28,7 @@ export default function Login() {
     event.preventDefault();
     console.log(loginEmail, loginPassword, loginConfirm);
 
-    if (registerPassword !== registerConfirm) {
+    if (loginPassword !== loginConfirm) {
       setError("Passwords don't match!");
       return;
     }
@@ -75,172 +74,169 @@ export default function Login() {
   }
 
   return (
-    <>
-      <>
-        <div>
-          <h1 id="headline">Log-in</h1>
+    <div id="login-page">
+      <h1 id="headline">Log-in</h1>
 
-          <FormGroup
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "10px",
-            }}
-            component="form"
-            noValidate
-            autoComplete="off"
-            color="secondary"
-            size="medium"
-            variant="outlined"
-            className="login-form"
-          >
-            <TextField
-              label="Email"
-              type="email"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-            />
+      <FormGroup
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "10px",
+        }}
+        component="form"
+        noValidate
+        autoComplete="off"
+        color="secondary"
+        size="medium"
+        variant="outlined"
+        className="login-form"
+      >
+        <TextField
+          label="Email"
+          type="email"
+          value={loginEmail}
+          onChange={(e) => setLoginEmail(e.target.value)}
+          className="email-input"
+          required
+          color="secondary"
+          size="small"
+        />
 
-            <TextField
-              label="Password"
-              type="password"
-              onChange={(event) => setLoginPassword(event.target.value)}
-              value={loginPassword}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-            />
+        <TextField
+          label="Password"
+          type="password"
+          onChange={(event) => setLoginPassword(event.target.value)}
+          value={loginPassword}
+          className="email-input"
+          required
+          color="secondary"
+          size="small"
+        />
 
-            <TextField
-              label="Confirm Password"
-              type="password"
-              onChange={(event) => setLoginConfirm(event.target.value)}
-              value={loginConfirm}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-            />
-            {/* {!loginConfirm && loginPassword ? (
+        <TextField
+          label="Confirm Password"
+          type="password"
+          onChange={(event) => setLoginConfirm(event.target.value)}
+          value={loginConfirm}
+          className="email-input"
+          required
+          color="secondary"
+          size="small"
+        />
+        {/* {!loginConfirm && loginPassword ? (
               <Stack sx={{ width: "80%" }} spacing={2}>
                 <Alert severity="error" variant="filled" onClick={setError}>
                   {error}
                 </Alert>
               </Stack>
             ) : null} */}
-            <ThemeProvider theme={theme}>
-              <Button
-                className="log-in"
-                type="submit"
-                onClick={handleLogin}
-                variant="contained"
-                color="secondary"
-              >
-                Login
-              </Button>
-            </ThemeProvider>
-          </FormGroup>
-        </div>
-      </>
+        <ThemeProvider theme={theme}>
+          <Button
+            className="log-in"
+            type="submit"
+            onClick={handleLogin}
+            variant="contained"
+            color="secondary"
+          >
+            Login
+          </Button>
+          {error}
+        </ThemeProvider>
+      </FormGroup>
       <div className="new-register">
         No Account?
-        <Link to={`/register`}>Register Here</Link>
-        <br />
-        <Link to={`/`}>Forgot Password?</Link>
+        <div onClick={() => setRegisterVisible(true)}>Register Here</div>
+        <div>Forgot Password?</div>
       </div>
-      <div>
-        <h1 id="headline">Register</h1>
-        <>
-          <FormGroup
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "20px",
-            }}
-            component="form"
-            onSubmit={handleRegister}
-            noValidate
-            autoComplete="off"
-            color="secondary"
-            size="medium"
-            variant="outlined"
-            className="login-form"
-          >
-            <TextField
-              label="First Name"
-              type="name"
-              onChange={(event) => setFirstName(event.target.value)}
-              value={firstName}
-              className="email-input"
-              required
+      {registerVisible && (
+        <div>
+          <h1 id="headline">Register</h1>
+          <>
+            <FormGroup
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "20px",
+              }}
+              component="form"
+              onSubmit={handleRegister}
+              noValidate
+              autoComplete="off"
               color="secondary"
-              size="small"
-            />
-            <TextField
-              label="Last Name"
-              type="name"
-              onChange={(event) => setLastName(event.target.value)}
-              value={lastName}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-            />
-
-            <TextField
-              label="Email"
-              type="email"
-              onChange={(event) => setRegisterEmail(event.target.value)}
-              value={registerEmail}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-            />
-
-            <TextField
-              label="Password"
-              type="password"
-              onChange={(event) => setRegisterPassword(event.target.value)}
-              value={registerPassword}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-            />
-            <TextField
-              label="Confirm Password"
-              type="password"
-              onChange={(event) => setRegisterConfirm(event.target.value)}
-              value={registerConfirm}
-              className="email-input"
-              required
-              color="secondary"
-              size="small"
-              style={theme}
-            />
-
-            <ThemeProvider theme={theme}>
-              <Button
-                className="log-in"
-                type="submit"
-                onClick={handleRegister}
+              size="medium"
+              variant="outlined"
+              className="login-form"
+            >
+              <TextField
+                label="First Name"
+                type="name"
+                onChange={(event) => setFirstName(event.target.value)}
+                value={firstName}
+                className="email-input"
+                required
                 color="secondary"
-                size="large"
-                variant="contained"
-              >
-                Register
-              </Button>
-            </ThemeProvider>
+                size="small"
+              />
+              <TextField
+                label="Last Name"
+                type="name"
+                onChange={(event) => setLastName(event.target.value)}
+                value={lastName}
+                className="email-input"
+                required
+                color="secondary"
+                size="small"
+              />
 
-            {/* {registerPassword !== registerConfirm && (
+              <TextField
+                label="Email"
+                type="email"
+                onChange={(event) => setRegisterEmail(event.target.value)}
+                value={registerEmail}
+                className="email-input"
+                required
+                color="secondary"
+                size="small"
+              />
+
+              <TextField
+                label="Password"
+                type="password"
+                onChange={(event) => setRegisterPassword(event.target.value)}
+                value={registerPassword}
+                className="email-input"
+                required
+                color="secondary"
+                size="small"
+              />
+              <TextField
+                label="Confirm Password"
+                type="password"
+                onChange={(event) => setRegisterConfirm(event.target.value)}
+                value={registerConfirm}
+                className="email-input"
+                required
+                color="secondary"
+                size="small"
+                style={theme}
+              />
+
+              <ThemeProvider theme={theme}>
+                <Button
+                  className="log-in"
+                  type="submit"
+                  onClick={handleRegister}
+                  color="secondary"
+                  size="large"
+                  variant="contained"
+                >
+                  Register
+                </Button>
+              </ThemeProvider>
+
+              {/* {registerPassword !== registerConfirm && (
               <Stack sx={{ width: "80%" }} spacing={2}>
                 <Alert
                   severity="error"
@@ -251,10 +247,11 @@ export default function Login() {
                 </Alert>
               </Stack>
             )} */}
-          </FormGroup>
-        </>
-      </div>
-    </>
+            </FormGroup>
+          </>
+        </div>
+      )}
+    </div>
   );
 }
 

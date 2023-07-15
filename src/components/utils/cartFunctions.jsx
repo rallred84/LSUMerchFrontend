@@ -45,15 +45,34 @@ export function addToAnonCart(product, cart, setCart) {
     id: product.id,
     name: product.name,
     price: product.price,
+    imageURL: product.imageURL,
     quantity: 1,
   });
 
-  // cart.products.push({
-  //   id: product.id,
-  //   name: product.name,
-  //   price: product.price,
-  //   quantity: 1,
+  // let cartTotal = 0;
+
+  // newCart.products.forEach((product) => {
+  //   cartTotal =
+  //     cartTotal + Number(product.price.slice(1)) * Number(product.quantity);
+  //   console.log(cartTotal);
   // });
+
+  // newCart.totalPrice = cartTotal;
+
+  newCart.totalPrice = calculateCartPrice(newCart);
+
   setCart(newCart);
   window.localStorage.setItem("cart", JSON.stringify(newCart));
+}
+
+export function calculateCartPrice(cart) {
+  let cartTotal = 0;
+
+  cart.products.forEach((product) => {
+    cartTotal =
+      cartTotal + Number(product.price.slice(1)) * Number(product.quantity);
+    console.log(cartTotal);
+  });
+
+  return cartTotal;
 }

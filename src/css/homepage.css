@@ -25,12 +25,12 @@
 }
 
 .home-cards-container > .product-card {
-  flex: 1 0 350px;
+  flex: 1 0 250px;
   display: flex;
   flex-direction: column;
 }
 
-.home-product-image {
+.product-image {
   width: 100%;
   flex-grow: 1;
   object-fit: scale-down;

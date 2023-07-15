@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { removeFromCart, getProfile, updateCartItemQuantity } from "../api";
 import { IconButton } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import { calculateCartPrice } from "../components/utils/cartFunctions";
 
 const Checkout = () => {
   const { user, setUser, cart, setCart, token } = useOutletContext();
@@ -28,11 +29,10 @@ const Checkout = () => {
       const newProducts = cart.products.filter(
         (product) => product.id !== productId
       );
-      setCart({ products: newProducts });
-      window.localStorage.setItem(
-        "cart",
-        JSON.stringify({ products: newProducts })
-      );
+      const updatedCart = { products: newProducts };
+      updatedCart.totalPrice = calculateCartPrice(updatedCart);
+      setCart(updatedCart);
+      window.localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
 
@@ -50,11 +50,11 @@ const Checkout = () => {
           return product;
         }
       });
-      setCart({ products: newProducts });
-      window.localStorage.setItem(
-        "cart",
-        JSON.stringify({ products: newProducts })
-      );
+
+      const updatedCart = { products: newProducts };
+      updatedCart.totalPrice = calculateCartPrice(updatedCart);
+      setCart(updatedCart);
+      window.localStorage.setItem("cart", JSON.stringify(updatedCart));
     }
   };
 
@@ -67,7 +67,7 @@ const Checkout = () => {
 
         <div id="checkout-table">
           <div className="grid checkout-head">
-            <div>Item Id</div>
+            <div></div>
             <div>Item Name</div>
             <div>Item Quantity</div>
             <div>Item Price</div>
@@ -117,7 +117,9 @@ const Checkout = () => {
             <div></div>
             <div></div>
             <div>Total</div>
-            <div>{user.cart && user.cart.totalPrice}</div>
+            <div>
+              {user.cart ? user.cart.totalPrice : `$${cart.totalPrice}.00`}
+            </div>
           </div>
         </div>
         <div className="checkout-button">
