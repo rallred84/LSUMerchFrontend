@@ -1,0 +1,37 @@
+#home-page {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#welcome {
+  width: 100%;
+}
+
+#featured-header {
+  font-family: "daggersquare";
+  font-size: 32px;
+  color: #3c1053;
+  text-shadow: 2px 2px 5px #f1eedb;
+  margin: 15px;
+}
+
+.home-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  justify-content: center;
+}
+
+.home-cards-container > .product-card {
+  flex: 1 0 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-product-image {
+  width: 100%;
+  flex-grow: 1;
+  object-fit: scale-down;
+}

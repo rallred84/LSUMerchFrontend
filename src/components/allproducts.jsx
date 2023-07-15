@@ -16,7 +16,7 @@ export default function AllProducts() {
     return <></>;
   }
   return (
-    <div id="home_page" className="home-page-container">
+    <div id="all-products" className="home-page-container">
       <h1 id="welcome">Welcome To The Tigers Den!</h1>
       <div className="product-container">
         <div id="categories" className="categories-container">
