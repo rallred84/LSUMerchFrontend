@@ -92,7 +92,9 @@ export async function createProduct(
   price,
   stockQuantity,
   imageURL,
-  size
+  size,
+  category,
+  isFeatured
 ) {
   try {
     const response = await fetch(`${BASE_URL}/products`, {
@@ -108,6 +110,8 @@ export async function createProduct(
         stockQuantity,
         imageURL,
         size,
+        category,
+        isFeatured,
       }),
     });
     const result = await response.json();
@@ -126,7 +130,9 @@ export async function editProduct(
   description,
   price,
   stockQuantity,
-  size
+  size,
+  category,
+  isFeatured,
 ) {
   try {
     const response = await fetch(`${BASE_URL}/products/${productId}`, {
@@ -141,6 +147,8 @@ export async function editProduct(
         price,
         stockQuantity,
         size,
+        category,
+        isFeatured,
       }),
     });
     const result = await response.json();

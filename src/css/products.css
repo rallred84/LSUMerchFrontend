@@ -17,6 +17,7 @@
 }
 .single-product-name {
   font-size: 40px;
+  font-family: 'Archivo Narrow', sans-serif;
   font-weight: bold;
   color: black !important;
   text-decoration: none;
