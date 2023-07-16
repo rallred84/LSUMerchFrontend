@@ -146,8 +146,10 @@ export default function Login() {
       </FormGroup>
       <div className="new-register">
         No Account?
-        <div onClick={() => setRegisterVisible(true)}>Register Here</div>
-        <div>Forgot Password?</div>
+        <div onClick={() => setRegisterVisible(true)} className="register-here">
+          Register Here
+        </div>
+        <div className="forgot-password">Forgot Password?</div>
       </div>
       {registerVisible && (
         <div>
@@ -235,18 +237,6 @@ export default function Login() {
                   Register
                 </Button>
               </ThemeProvider>
-
-              {/* {registerPassword !== registerConfirm && (
-              <Stack sx={{ width: "80%" }} spacing={2}>
-                <Alert
-                  severity="error"
-                  variant="filled"
-                  onClick={handleRegister}
-                >
-                  {error}
-                </Alert>
-              </Stack>
-            )} */}
             </FormGroup>
           </>
         </div>
@@ -254,62 +244,3 @@ export default function Login() {
     </div>
   );
 }
-
-{
-  /* <input
-    placeholder="email"
-    onChange={(event) => setLoginEmail(event.target.value)}
-    value={loginEmail}
-  /> */
-}
-{
-  /* <input
-    placeholder="password"
-    type="password"
-    onChange={(event) => setLoginPassword(event.target.value)}
-    value={loginPassword}
-  /> */
-}
-{
-  /* <input
-        placeholder="confirm"
-        type="password"
-        onChange={(event) => setLoginConfirm(event.target.value)}
-        value={loginConfirm} />
-      <div id="login-err">{error}</div>
-      <button id="log-in">Login</button>
-    </form><div>
-        No Account?<Link to={`/register`}>Register Here</Link>
-      </div><h1 id="headline">Register</h1><form onSubmit={handleRegister} id="registering">
-        <input
-          placeholder="first name"
-          onChange={(event) => setFirstName(event.target.value)}
-          value={firstName} />
-        <input
-          placeholder="last name"
-          onChange={(event) => setLastName(event.target.value)}
-          value={lastName} />
-        <input
-          placeholder="email"
-          onChange={(event) => setRegisterEmail(event.target.value)}
-          value={registerEmail} />
-        <input
-          placeholder="password"
-          type="password"
-          onChange={(event) => setRegisterPassword(event.target.value)}
-          value={registerPassword} />
-        <input
-          placeholder="confirm"
-          type="password"
-          onChange={(event) => setRegisterConfirm(event.target.value)}
-          value={registerConfirm} />
-        <div id="reg-err">{error}</div>
-        <button id="register">Register</button>
-      </form></></>
-    </div>
-  ); */
-}
-
-//   );
-
-// }
