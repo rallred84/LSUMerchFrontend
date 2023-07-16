@@ -12,6 +12,8 @@ const NewProduct = () => {
   const [stockQuantity, setStockQuantity] = useState("");
   const [size, setSize] = useState("");
   const [imageURL, setImageURL] = useState("");
+  const [category, setCategory] = useState("");
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const { user, token, products, setProducts } = useOutletContext();
 
@@ -28,7 +30,9 @@ const NewProduct = () => {
           price,
           stockQuantity,
           imageURL,
-          size
+          size, 
+          category,
+          isFeatured
         );
         console.log(result);
         setProducts([result, ...products]);
@@ -81,6 +85,25 @@ const NewProduct = () => {
           onChange={(event) => setSize(event.target.value)}
           value={size}
         />
+        <select
+          className="new-product-input"
+          placeholder="Category"
+          onChange={(event) => setCategory(event.target.value)}
+          value={category}>
+          <option>Accessories</option>
+          <option>Baby</option>
+          <option>Clothing</option>
+          <option>Household</option>
+          <option>Memorabilia</option>
+        </select>
+        <label>Featured Product
+          <input
+            className="new-product-input"
+            type="checkbox"
+            onChange={() => setIsFeatured(!isFeatured)}
+            value={isFeatured}
+           />
+        </label>
         <ImageUpload imageURL={imageURL} setImageURL={setImageURL} />
         <button className="new-product-button" type="submit">
           Create Product
