@@ -1,14 +1,27 @@
-import { useOutletContext, Link, useNavigate } from "react-router-dom";
+import React from "react";
 import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate, Form } from "react-router-dom";
 import { getAllProducts, createReview } from "../api";
-import { useParams } from "react-router-dom";
-import { Button } from "@mui/material";
+import {
+  Button,
+  FilledInput,
+  FormControl,
+  Input,
+  TextField,
+} from "@mui/material";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { addToCart } from "../components/utils/cartFunctions";
-
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useOutletContext } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 
-import { inCartToast } from "../routes/root";
+library.add(faStar);
+
+import "../css/products.css";
 
 const theme = createTheme({
   components: {
@@ -23,9 +36,60 @@ const theme = createTheme({
           fontWeight: "bold",
           transition: "background-color 0.3s ease-in-out",
           fontSize: "16px",
+          margin: "8px 0",
 
           "&:hover": {
             backgroundColor: "#d29f13",
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+
+          containIntrinsicWidth: "100%",
+          borderRadius: "4px",
+          padding: "8px 16px",
+          fontWeight: "bold",
+          fontSize: "16px",
+          transition: "background-color 0.3s ease-in-out",
+          "&:hover": {
+            backgroundColor: "#d29f13",
+            color: "white",
+            textTransform: "none",
+            borderRadius: "4px",
+            padding: "8px 16px",
+            fontWeight: "bold",
+            fontSize: "16px",
+          },
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+
+          borderRadius: "4px",
+          padding: "8px 16px",
+          fontWeight: "bold",
+          fontSize: "16px",
+          transition: "background-color 0.3s ease-in-out",
+          "&:hover": {
+            color: "white",
+            textTransform: "none",
+            borderRadius: "4px",
+            padding: "8px 16px",
+            fontWeight: "bold",
+            fontSize: "16px",
           },
         },
       },
@@ -35,33 +99,31 @@ const theme = createTheme({
 
 export default function Products() {
   const { productId } = useParams();
-  const { cart, setCart, user, setUser, token, theme } = useOutletContext();
+  const { cart, setCart, user, setUser, token } = useOutletContext();
   const [loading, setLoading] = useState(true);
-
   const [product, setProduct] = useState({});
-
-  const [reviewForm, setReviewForm] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
   const [message, setMessage] = useState("");
   const [rating, setRating] = useState(0);
 
   const navigate = useNavigate();
 
-  const showReviewForm = async () => {
-    setReviewForm(!reviewForm)
+  const toggleReviewForm = () => {
+    setShowReviewForm((prevShowReviewForm) => !prevShowReviewForm);
   };
 
-  async function handleReview(event) {
+  const handleReviewSubmit = async (event) => {
     event.preventDefault();
     try {
       if (user) {
         const result = await createReview(token, productId, message, rating);
         console.log(result);
-        navigate('/all-products')
-    }
+        navigate("/all-products");
+      }
     } catch (err) {
-      console.error(err)  
+      console.error(err);
     }
-  }
+  };
 
   const singleProduct = async () => {
     try {
@@ -69,7 +131,7 @@ export default function Products() {
       const products = await getAllProducts(productId);
 
       const product = products.find((product) => product.id == productId);
-      console.log(product)
+      console.log(product);
       setProduct(product);
 
       setLoading(false);
@@ -83,8 +145,7 @@ export default function Products() {
   }, [productId]);
 
   if (loading) {
-    return;
-    <> Loading...</>;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -99,7 +160,10 @@ export default function Products() {
           <div className="single-product-price">Price: {product.price}</div>
           <div className="product-page-btn">
             <ThemeProvider theme={theme}>
-              <ButtonGroup orientation="vertical">
+              <ButtonGroup
+                orientation="horizontal"
+                className="single-product-btn"
+              >
                 <Button
                   onClick={(e) =>
                     addToCart(
@@ -125,53 +189,95 @@ export default function Products() {
                 </Link>
                 <br />
                 {user?.id && (
-                <>
-                <Button onClick={showReviewForm} className="review-product-btn">
-                    Review Product
-                </Button>{" "}
+                  <>
+                    <Button
+                      onClick={toggleReviewForm}
+                      className="review-product-btn"
+                    >
+                      Review Product
+                    </Button>{" "}
                   </>
                 )}
               </ButtonGroup>
             </ThemeProvider>
-            {reviewForm && (
-            <div>
-            <h1>Leave A Review</h1>
-            <form onSubmit={handleReview} id="new-review">
-              <input
-                placeholder="Message"
-                onChange={(event) => setMessage(event.target.value)}
-                value={message}
-                minLength={15}
-              />
-              <input
-                placeholder="Rating"
-                onChange={(event) => setRating(event.target.value)}
-                value={rating}
-              />
-              <button>Leave Review</button>  
-            </form>
-            </div>
+            {showReviewForm && (
+              <FormControl fullWidth>
+                <div className="review-form-container">
+                  <h1 className="review-form-title">Leave A Review</h1>
+                  <Form
+                    color="secondary"
+                    onSubmit={handleReviewSubmit}
+                    className="review-form"
+                    theme={theme}
+                    autoComplete="off"
+                    noValidate
+                  >
+                    <TextField
+                      className="review-form-input"
+                      placeholder="Message"
+                      onChange={(event) => setMessage(event.target.value)}
+                      value={message}
+                      minLength={15}
+                      color="secondary"
+                      theme={theme}
+                      multiline
+                      rows={4}
+                      fullWidth
+                    />
+                    <div className="star-rating">
+                      <p className="star-label">Rating:</p>
+                      <div className="stars">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <React.Fragment key={star}>
+                            <Input
+                              type="radio"
+                              id={`star${star}`}
+                              name="rating"
+                              value={star}
+                              checked={rating === star}
+                              onChange={() => setRating(star)}
+                              className="star-radio"
+                            />
+                            <label
+                              htmlFor={`star${star}`}
+                              title={`${star} star`}
+                            >
+                              <FontAwesomeIcon
+                                icon={rating >= star ? solidStar : regularStar}
+                                className="star-icon"
+                                id={`star${star}`}
+                                name="rating"
+                                value={star}
+                              />
+                            </label>
+                          </React.Fragment>
+                        ))}
+                      </div>
+                    </div>
+                    <Button
+                      theme={theme}
+                      type="submit"
+                      className="review-form-submit"
+                    >
+                      Leave Review
+                    </Button>
+                  </Form>
+                </div>
+              </FormControl>
             )}
             {product.reviews.length > 0 && (
-            <>
-            <div>
-              <h1>Reviews</h1>
-              {product.reviews && product.reviews.length
-              ? product.reviews.map((review) => {
-                return(
-                  <div key={review.id}>
+              <div className="reviews-container">
+                <h1 className="reviews-title">Reviews</h1>
+                {product.reviews.map((review) => (
+                  <div key={review.id} className="review-item">
                     <div className="review-creator">{review.creatorName}</div>
                     <div className="review-date">Posted: {review.date}</div>
                     <div className="review-message">{review.message}</div>
                     <div className="review-rating">Rating: {review.rating}</div>
                   </div>
-                )
-              })
-            : null}
-            </div>
-            </>
-            ) 
-          }
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
