@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 
 import "../css/homepage.css";
 
+import tigersdenbanner from "../assets/tdbanner2.png";
+
 export default function Welcome() {
   const { products, user, setUser, token, cart, setCart, theme } =
     useOutletContext();
@@ -30,6 +32,9 @@ export default function Welcome() {
 
   return (
     <div id="home-page">
+      <div className="tigersden-banner">
+          <img src={tigersdenbanner} alt="tigersden banner" />
+      </div>
       <h2 id="featured-header">Check Out Some of Today's Featured Items!</h2>
       <div className="home-cards-container">
         {featured.length > 0 ? (
