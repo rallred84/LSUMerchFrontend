@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "../css/checkout.css";
 import { useEffect, useState } from "react";
 import {
@@ -14,6 +14,8 @@ import { calculateCartPrice } from "../components/utils/cartFunctions";
 const Checkout = () => {
   const { user, setUser, cart, setCart, token } = useOutletContext();
   const [productList, setProductList] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cart?.products) {
@@ -141,7 +143,9 @@ const Checkout = () => {
               Proceed to Payment
             </button>
           ) : (
-            <button>Log On to Complete Purchase</button>
+            <button onClick={() => navigate("/login")}>
+              Log In to Complete Purchase
+            </button>
           )}
         </div>
       </div>

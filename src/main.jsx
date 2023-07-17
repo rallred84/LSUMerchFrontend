@@ -18,6 +18,7 @@ import AllProducts from "./components/allproducts";
 import CreateReview from "./components/newreview";
 import EditReview from "./components/editreview";
 import OrderConfirmation from "./components/orderConfirmation";
+import ManageUsers from "./components/manageUsers";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/manage-orders",
         element: <ManageOrders />,
+      },
+      {
+        path: "/manage-users",
+        element: <ManageUsers />,
       },
       {
         path: "/all-products",

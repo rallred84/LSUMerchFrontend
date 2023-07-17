@@ -28,6 +28,10 @@
   font-weight: bold;
 }
 
+.order-history {
+  width: 70%;
+}
+
 .order-history h1,
 .my-reviews h1 {
   font-size: 20px;
