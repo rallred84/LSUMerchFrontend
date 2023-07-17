@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { createProduct } from "../api";
+import { createProduct, getAllProducts } from "../api";
 import ImageUpload from "./imageUpload";
 
 import "../css/productForm.css";
@@ -23,25 +23,23 @@ const NewProduct = () => {
     event.preventDefault();
     try {
       if (user.isAdmin) {
-        const result = await createProduct(
-          token,
-          name,
-          description,
-          price,
-          stockQuantity,
-          imageURL,
-          size, 
-          category,
-          isFeatured
-        );
-        console.log(result);
-        setProducts([result, ...products]);
-        setName("");
-        setDescription("");
-        setPrice(0);
-        setStockQuantity(0);
-        setSize("");
-        navigate("/manage-products");
+        (async () => {
+          const result = await createProduct(
+            token,
+            name,
+            description,
+            price,
+            stockQuantity,
+            imageURL,
+            size,
+            category,
+            isFeatured
+          );
+          console.log(result);
+          const fetchProducts = await getAllProducts();
+          setProducts(fetchProducts);
+          navigate(`/products/${result.data.product.id}`);
+        })();
       }
     } catch (err) {
       console.error(err);
@@ -89,20 +87,25 @@ const NewProduct = () => {
           className="new-product-input"
           placeholder="Category"
           onChange={(event) => setCategory(event.target.value)}
-          value={category}>
-          <option>Accessories</option>
-          <option>Baby</option>
-          <option>Clothing</option>
-          <option>Household</option>
-          <option>Memorabilia</option>
+          value={category}
+        >
+          <option value="">Choose a Product Category:</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Baby">Baby</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Household">Household</option>
+          <option value="Memorabilia">Memorabilia</option>
         </select>
-        <label>Featured Product
-          <input
-            className="new-product-input"
-            type="checkbox"
-            onChange={() => setIsFeatured(!isFeatured)}
-            value={isFeatured}
-           />
+        <label className="new-product-input">
+          <div className="featured-select">
+            <span>Featured Product?</span>
+            <input
+              className="new-product-input"
+              type="checkbox"
+              onChange={() => setIsFeatured(!isFeatured)}
+              value={isFeatured}
+            />
+          </div>
         </label>
         <ImageUpload imageURL={imageURL} setImageURL={setImageURL} />
         <button className="new-product-button" type="submit">

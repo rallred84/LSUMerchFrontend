@@ -657,6 +657,7 @@
   padding: 20px;
   background-color: #f2f2f2;
   border-radius: 4px;
+  font-family: arial;
 }
 
 .new-product-title {
@@ -675,6 +676,18 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  background-color: white;
+}
+
+.featured-select {
+  display: flex;
+  align-items: center;
+}
+
+.featured-select > input {
+  position: relative;
+  top: 4px;
+  margin-left: 10px;
 }
 
 .new-product-button {
