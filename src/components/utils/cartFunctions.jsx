@@ -1,4 +1,8 @@
-import { addProductToCart, getProfile } from "../../api";
+import {
+  addProductToCart,
+  updateCartItemQuantity,
+  getProfile,
+} from "../../api";
 
 export async function addToCart(
   e,
@@ -33,7 +37,7 @@ export async function addToCart(
   if (!user.cart.id) {
     await createNewCart(token);
   }
-  await addProductToCart(token, product.id);
+  await addProductToCart(token, product.id, 1);
   const fetchMe = await getProfile(token);
   setUser(fetchMe);
 }
@@ -48,16 +52,6 @@ export function addToAnonCart(product, cart, setCart) {
     imageURL: product.imageURL,
     quantity: 1,
   });
-
-  // let cartTotal = 0;
-
-  // newCart.products.forEach((product) => {
-  //   cartTotal =
-  //     cartTotal + Number(product.price.slice(1)) * Number(product.quantity);
-  //   console.log(cartTotal);
-  // });
-
-  // newCart.totalPrice = cartTotal;
 
   newCart.totalPrice = calculateCartPrice(newCart);
 
@@ -75,4 +69,53 @@ export function calculateCartPrice(cart) {
   });
 
   return cartTotal;
+}
+
+export async function addLoggedOutCartToUser(
+  existingCartProducts,
+  token,
+  setUser
+) {
+  const loggedOutCart = JSON.parse(window.localStorage.getItem("cart"));
+  console.log(loggedOutCart);
+
+  if (loggedOutCart?.products[0]) {
+    console.log(loggedOutCart.products);
+    loggedOutCart.products.map((product) => {
+      let alreadyInCart = false;
+      let existingProduct = null;
+      existingCartProducts.forEach((p) => {
+        if (product.id === p.id) {
+          alreadyInCart = true;
+          existingProduct = p;
+        }
+      });
+      //If not in users cart, add
+      if (!alreadyInCart) {
+        Promise.resolve(
+          addProductToCart(token, product.id, product.quantity)
+        ).then(async () => {
+          const fetchMe = await getProfile(token);
+          setUser(fetchMe);
+        });
+      } else {
+        //If in users cart, update quantity
+        const newQuantity =
+          Number(existingProduct.quantity) + Number(product.quantity) <= 5
+            ? Number(existingProduct.quantity) + Number(product.quantity)
+            : 5;
+        Promise.resolve(
+          updateCartItemQuantity(token, product.id, newQuantity)
+        ).then(async () => {
+          const fetchMe = await getProfile(token);
+          setUser(fetchMe);
+        });
+      }
+    });
+
+    // Reset user and delete logged out cart from local storage
+    const fetchMe = await getProfile(token);
+    setUser(fetchMe);
+    window.localStorage.removeItem("cart");
+  }
 }

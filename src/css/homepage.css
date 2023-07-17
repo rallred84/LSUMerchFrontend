@@ -39,9 +39,35 @@
 .tigersden-banner {
   width: 100vw;
   height: 100%;
+  position: relative;
 }
 
 .tigersden-banner > img {
   width: 100vw;
   height: 100%;
+}
+
+.tigersden-banner > div {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  text-align: center;
+}
+
+.tigersden-banner span {
+  border: 3px solid white;
+  color: white;
+  cursor: pointer;
+  font-family: Archivo Narrow, Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px #8c57f3;
+  text-shadow: 3px 3px 5px #8c57f3;
+}
+
+.tigersden-banner span:hover {
+  border: 3px solid #fdd023;
+  color: #fdd023;
 }

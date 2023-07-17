@@ -132,7 +132,7 @@ export async function editProduct(
   stockQuantity,
   size,
   category,
-  isFeatured,
+  isFeatured
 ) {
   try {
     const response = await fetch(`${BASE_URL}/products/${productId}`, {
@@ -306,7 +306,7 @@ export async function createNewCart(token) {
 
 //POST /orders_products/add
 
-export async function addProductToCart(token, productId) {
+export async function addProductToCart(token, productId, quantity) {
   try {
     const response = await fetch(`${BASE_URL}/orders_products/add`, {
       method: "POST",
@@ -316,7 +316,7 @@ export async function addProductToCart(token, productId) {
       },
       body: JSON.stringify({
         productId,
-        quantity: 1,
+        quantity,
       }),
     });
     const result = await response.json();

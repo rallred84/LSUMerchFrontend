@@ -3,9 +3,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/header";
 import Nav from "../components/nav";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getAllProducts, getOrders, getProfile } from "../api";
 import { createTheme } from "@mui/material/styles";
+import { addLoggedOutCartToUser } from "../components/utils/cartFunctions";
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -20,6 +21,8 @@ const Root = () => {
   const [cart, setCart] = useState({});
   const [orders, setOrders] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+
+  const topOfHome = useRef(null);
 
   const theme = createTheme({
     components: {
@@ -74,17 +77,22 @@ const Root = () => {
   //After user logs in, set user's cart
   useEffect(() => {
     if (user.id) {
-      setCart(user.cart);
-      //Will add merging cart functionality here later
-      window.localStorage.removeItem("cart");
+      (async () => {
+        setCart(user.cart);
+        //Merge existing Cart to User's Cart
+        await addLoggedOutCartToUser(user.cart.products, token, setUser);
+      })();
     } else {
       const cartString = window.localStorage.getItem("cart");
       console.log(cartString);
       if (cartString) {
         setCart(JSON.parse(cartString));
       } else {
-        setCart({ products: [] });
-        window.localStorage.setItem("cart", JSON.stringify({ products: [] }));
+        setCart({ products: [], totalPrice: 0 });
+        window.localStorage.setItem(
+          "cart",
+          JSON.stringify({ products: [], totalPrice: 0 })
+        );
       }
     }
   }, [user]);
@@ -114,7 +122,12 @@ const Root = () => {
   return (
     <>
       <Header user={user} setUser={setUser} setToken={setToken} cart={cart} />
-      <Nav user={user} setUser={setUser} setToken={setToken} />
+      <Nav
+        user={user}
+        setUser={setUser}
+        setToken={setToken}
+        topOfHome={topOfHome}
+      />
       <div id="main">
         <Outlet
           context={{
@@ -131,6 +144,7 @@ const Root = () => {
             setIsLoadingProducts,
             orders,
             setOrders,
+            topOfHome,
           }}
         />
         <Toaster

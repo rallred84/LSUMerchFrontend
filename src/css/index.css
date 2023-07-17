@@ -1,7 +1,7 @@
 /* Site Wide Universal Styles */
 
 /*Alternate Font*/
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
   margin: 0;
@@ -137,10 +137,17 @@
   padding: 10px;
 }
 
-.non-user-nav > a,
-.user-nav > a {
+.non-user-nav > div,
+.user-nav > div {
   min-width: 270px;
   text-align: center;
+  color: #3c1053;
+}
+
+.non-user-nav > div:hover,
+.user-nav > div:hover {
+  color: red;
+  cursor: pointer;
 }
 
 .nav-link1 {
@@ -378,7 +385,7 @@
 
 .product-name {
   margin-bottom: 10px;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: "Archivo Narrow", sans-serif;
   font-size: 40px;
   font-weight: bold;
   color: #3c1053;
@@ -444,7 +451,7 @@
 .product-description {
   margin-bottom: 20px;
   font-size: 30px; /* Adjust the font size as needed */
-  font-family: 'Archivo', sans-serif;
+  font-family: "Archivo", sans-serif;
   font-weight: 400;
   color: black !important;
   text-decoration: none;
