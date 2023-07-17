@@ -1,0 +1,29 @@
+.manage-orders-page {
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+.admin-orders {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ccc;
+    background-color: #fff;
+  }
+
+.order-id span,
+.order-status span,
+.order-user span,
+.order-price span {
+  font-weight: bold;
+  font-size: 20px;
+  color: #000;
+  text-transform: uppercase;
+}
