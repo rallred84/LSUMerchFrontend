@@ -110,18 +110,6 @@ const Root = () => {
     }
   }, [cart]);
 
-  //Lets move this useEffect to the admin dashboard
-  useEffect(() => {
-    if (user.isAdmin) {
-      const fetchOrders = async () => {
-        const fetchAllOrders = await getOrders(token);
-        console.log(fetchAllOrders);
-        setOrders(fetchAllOrders);
-      };
-      fetchOrders();
-    }
-  }, [token]);
-
   if (isLoadingProducts) {
     return <>Loading...</>;
   }

@@ -319,6 +319,23 @@ export async function placeOrder(token) {
   }
 }
 
+//PATCH /orders/:orderId/complete
+export async function orderComplete(token, orderId) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/${orderId}/complete`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 ////////// ORDERS_PRODUCTS
 
 //POST /orders_products/add
