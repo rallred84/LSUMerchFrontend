@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import { useOutletContext } from "react-router-dom";
 // import { useState } from "react";
 
-const Nav = ({ topOfHome }) => {
+const Nav = ({ setToken, setUser, topOfHome }) => {
   function loggedUser() {
     const user = localStorage.getItem("token");
 
@@ -28,7 +28,13 @@ const Nav = ({ topOfHome }) => {
                 localStorage.removeItem("token");
                 setToken("");
                 setUser({});
-                window.location.reload();
+                navigate("/");
+                if (topOfHome.current) {
+                  topOfHome.current.scrollIntoView({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                }
               }}
             >
               Logout
