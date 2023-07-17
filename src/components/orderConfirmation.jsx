@@ -1,16 +1,22 @@
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { placeOrder, createNewCart } from "../api";
+import { placeOrder, createNewCart, getProfile } from "../api";
 
 const OrderConfirmation = () => {
   const { orderId } = useParams();
-  const { user, cart, token } = useOutletContext();
+  const { user, setUser, cart, token } = useOutletContext();
   const navigate = useNavigate();
   const [securityCheck, setSecurityCheck] = useState(true);
+  const [userCart, setUserCart] = useState({});
+
+  useEffect(() => {
+    if (orderId == cart.id) {
+      setUserCart(cart);
+    }
+  }, [cart]);
 
   useEffect(() => {
     (async () => {
-      const userCart = { ...cart };
       if (userCart.id && securityCheck) {
         if (userCart.id !== Number(orderId)) {
           navigate("/account");
@@ -18,11 +24,13 @@ const OrderConfirmation = () => {
         setSecurityCheck(false);
         await placeOrder(token);
         await createNewCart(token);
+        const fetchMe = await getProfile(token);
+        setUser(fetchMe);
       }
     })();
-  }, [cart]);
+  }, [userCart]);
 
-  return cart?.id == orderId ? (
+  return userCart?.id == orderId ? (
     <div>
       <h1>Your order has been placed, {user.firstName}!</h1>
       <h3>Order Details:</h3>
@@ -32,7 +40,7 @@ const OrderConfirmation = () => {
         <div>Item Price</div>
         <div>Item Total</div>
       </div>
-      {cart.products.map((product, idx) => {
+      {userCart.products.map((product, idx) => {
         return (
           <div key={product.id} className="grid confirmation-grid">
             <div>{product.name}</div>
@@ -48,7 +56,7 @@ const OrderConfirmation = () => {
         <div></div>
         <div></div>
         <div>Total Price</div>
-        <div>{cart.totalPrice}</div>
+        <div>{userCart.totalPrice}</div>
       </div>
     </div>
   ) : (
