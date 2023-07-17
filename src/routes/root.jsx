@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/header";
 import Nav from "../components/nav";
 import { useEffect, useState, useRef } from "react";
-import { getAllProducts, getOrders, getProfile } from "../api";
+import { getAllProducts, getOrders, getProfile, createNewCart } from "../api";
 import { createTheme } from "@mui/material/styles";
 import { addLoggedOutCartToUser } from "../components/utils/cartFunctions";
 
@@ -78,7 +78,14 @@ const Root = () => {
   useEffect(() => {
     if (user.id) {
       (async () => {
-        setCart(user.cart);
+        if (user.cart.id) {
+          setCart(user.cart);
+        } else {
+          await createNewCart(token);
+          const fetchMe = await getProfile(token);
+          setUser(fetchMe);
+        }
+
         //Merge existing Cart to User's Cart
         await addLoggedOutCartToUser(user.cart.products, token, setUser);
       })();

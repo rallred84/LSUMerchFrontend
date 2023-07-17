@@ -302,6 +302,23 @@ export async function createNewCart(token) {
   }
 }
 
+//PATCH /orders/place
+export async function placeOrder(token) {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/place`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 ////////// ORDERS_PRODUCTS
 
 //POST /orders_products/add
@@ -365,6 +382,28 @@ export async function updateCartItemQuantity(token, productId, quantity) {
     const result = await response.json();
     console.log(result);
     return result;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+//Stripe Checkout
+export async function stripeCheckout(totalPrice, orderId, token) {
+  try {
+    const response = await fetch(`${BASE_URL}/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+
+      body: JSON.stringify({
+        totalPrice,
+        orderId,
+      }),
+    });
+    const body = await response.json();
+    window.location.href = body.url;
   } catch (err) {
     console.error(err);
   }

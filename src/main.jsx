@@ -16,7 +16,8 @@ import ErrorPage from "./error";
 import ManageOrders from "./components/manageorders";
 import AllProducts from "./components/allproducts";
 import CreateReview from "./components/newreview";
-import EditReview from "./components/editreview"
+import EditReview from "./components/editreview";
+import OrderConfirmation from "./components/orderConfirmation";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/:productId/editreview",
         element: <EditReview />,
+      },
+      {
+        path: "confirmation/:orderId",
+        element: <OrderConfirmation />,
       },
     ],
   },

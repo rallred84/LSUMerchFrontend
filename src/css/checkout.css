@@ -116,3 +116,7 @@
   object-fit: cover;
   border-radius: 4px;
 }
+
+.confirmation-grid {
+  grid-template-columns: 170px 300px 140px 140px;
+}
