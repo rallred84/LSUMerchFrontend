@@ -19,15 +19,11 @@ const Nav = ({ topOfHome }) => {
       return (
         <div id="nav-link1">
           <div className="user-nav">
-            <Link to="/" style={{ textDecoration: "none" }}>
-              Home
-            </Link>
-            <Link to="/all-products" style={{ textDecoration: "none" }}>
+            <div onClick={() => handleNavigateHome()}>Home</div>
+            <div onClick={() => navigate("/all-products")}>
               Shop All Products
-            </Link>
-            <Link
-              to="/"
-              style={{ textDecoration: "none" }}
+            </div>
+            <div
               onClick={() => {
                 localStorage.removeItem("token");
                 setToken("");
@@ -36,7 +32,7 @@ const Nav = ({ topOfHome }) => {
               }}
             >
               Logout
-            </Link>
+            </div>
           </div>
         </div>
       );
