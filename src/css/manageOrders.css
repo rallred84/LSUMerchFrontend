@@ -10,13 +10,14 @@
 }
 
 .admin-orders {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #ccc;
-    background-color: #fff;
-  }
+  min-width: 600px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #ccc;
+  background-color: #fff;
+}
 
 .order-id span,
 .order-status span,
