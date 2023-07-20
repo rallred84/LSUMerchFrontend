@@ -15,7 +15,7 @@ const NewProduct = () => {
   const [category, setCategory] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
 
-  const { user, token, products, setProducts } = useOutletContext();
+  const { user, token, setProducts } = useOutletContext();
 
   const navigate = useNavigate();
 

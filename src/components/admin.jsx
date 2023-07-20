@@ -3,17 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const navigate = useNavigate();
-  // function newProduct() {
-  //   window.location.href = "/new-product";
-  // }
-
-  // function manageProducts() {
-  //   window.location.href = "/manage-products";
-  // }
-
-  // function manageOrders() {
-  //   window.location.href = "/manage-orders";
-  // }
 
   return (
     <div className="admin-container">
